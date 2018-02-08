@@ -4,81 +4,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSLab1
+namespace CSLab1.Operations
 {
-    namespace Operations
+    interface IOperation
     {
-        interface IOperation
-        {
-            char OperatorChar { get; }
+        char OperatorChar { get; }
 
-            void Run();
+        void Run();
+    }
+
+    class Add : IOperation
+    {
+        public char OperatorChar { get => '+'; }
+        public void Run()
+        {
+            MathBuffer.AccValue += MathBuffer.TempValue;
         }
-
-        class Add : IOperation
+    }
+    class Sub : IOperation
+    {
+        public char OperatorChar { get => '-'; }
+        public void Run()
         {
-            public char OperatorChar { get => '+'; }
-            public void Run()
+            MathBuffer.AccValue -= MathBuffer.TempValue;
+        }
+    }
+    class Div : IOperation
+    {
+        public char OperatorChar { get => '/'; }
+        public void Run()
+        {
+            MathBuffer.AccValue /= MathBuffer.TempValue;
+        }
+    }
+    class Mul : IOperation
+    {
+        public char OperatorChar { get => '*'; }
+        public void Run()
+        {
+            MathBuffer.AccValue *= MathBuffer.TempValue;
+        }
+    }
+    class Jump : IOperation
+    {
+        public char OperatorChar { get => '#'; }
+        public void Run()
+        {
+            int value = 0;
+            bool success = false;
+
+            while (!success || value <= 0 || value > MathBuffer.buffer.Count)
             {
-                MathBuffer.AccValue += MathBuffer.TempValue;
+                Tools.Interface.CleanPreviousLine(4);
+                success = int.TryParse(Console.ReadLine(), out value);
             }
+
+            MathBuffer.AccValue = MathBuffer.buffer[value - 1];
         }
-        class Sub : IOperation
+    }
+    class Exit : IOperation
+    {
+        public char OperatorChar { get => 'q'; }
+        public void Run()
         {
-            public char OperatorChar { get => '-'; }
-            public void Run()
-            {
-                MathBuffer.AccValue -= MathBuffer.TempValue;
-            }
+            Console.Beep(880, 1000);
+            Processing.exitPressed = true;
         }
-        class Div : IOperation
-        {
-            public char OperatorChar { get => '/'; }
-            public void Run()
-            {
-                MathBuffer.AccValue /= MathBuffer.TempValue;
-            }
-        }
-        class Mul : IOperation
-        {
-            public char OperatorChar { get => '*'; }
-            public void Run()
-            {
-                MathBuffer.AccValue *= MathBuffer.TempValue;
-            }
-        }
-        class Jump : IOperation
-        {
-            public char OperatorChar { get => '#'; }
-            public void Run()
-            {
-                int value = 0;
-                bool success = false;
-
-                while (!success || value <= 0 || value > MathBuffer.buffer.Count)
-                {
-                    Console.CursorTop -= 1;
-
-                    Console.CursorLeft = 4;
-                    Console.Write("                                                                                                  ");
-
-                    Console.CursorLeft = 4;
-
-                    success = int.TryParse(Console.ReadLine(), out value);
-                }
-
-                MathBuffer.AccValue = MathBuffer.buffer[value - 1];
-            }
-        }
-        class Exit : IOperation
-        {
-            public char OperatorChar { get => 'q'; }
-            public void Run()
-            {
-                Console.Beep(880, 1000);
-                Environment.Exit(-1);
-            }
-        }
-
     }
 }

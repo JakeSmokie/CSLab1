@@ -10,7 +10,8 @@ namespace CSLab1
     {
         static void Main(string[] args)
         {
-            Processing.StartProcessing();
+            var processing = new Processing();
+            processing.Start();
         }
     }
 }

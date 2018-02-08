@@ -1,26 +1,20 @@
 ﻿using CSLab1.Operations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSLab1
 {
-    static class Processing
+    class Processing
     {
-        public static bool exitPressed;
+        private bool exitPressed;
 
-        private static List<IOperation> operations;
-        private static IOperation currentOperation;
+        private List<IOperation> operations;
+        private IOperation currentOperation;
+        private MathBuffer mathBuffer;
 
-        public static void StartProcessing()
+        public Processing()
         {
-            Console.WriteLine(
-                "Usage:\n" +
-                "       when first symbol on line is ‘>’ – enter operand(number)\n" +
-                "       when first symbol on line is ‘@’ – enter operation\n" +
-                "       operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-                "           ‘#’ followed with number of evaluation step\n" +
-                "           ‘q’ to exit\n");
-
             exitPressed = false;
             currentOperation = null;
 
@@ -30,74 +24,89 @@ namespace CSLab1
                 new Sub(),
                 new Div(),
                 new Mul(),
-                new Jump(),
-                new Exit()
+                new Jump()
             };
 
-            GetNumber();
+            mathBuffer = new MathBuffer();
+        }
 
-            do
+        public void Start()
+        {
+            Console.WriteLine(
+                "Usage:\n" +
+                "       when first symbol on line is ‘>’ – enter operand(number)\n" +
+                "       when first symbol on line is ‘@’ – enter operation\n" +
+                "       operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
+                "           ‘#’ followed with number of evaluation step\n" +
+                "           ‘q’ to exit\n");
+
+            bool getNextOperationInsteadNumber;
+            bool correctKey;
+
+            while (!exitPressed)
             {
-                bool getNextOperationInsteadNumber;
+                GetNumber();
 
                 do
                 {
                     getNextOperationInsteadNumber = false;
-                    bool correctKey = false;
+                    correctKey = false;
 
                     Console.Write("@: ");
 
-                    while (!correctKey)
+                    do
                     {
                         ConsoleKeyInfo input = Console.ReadKey(true);
 
-                        foreach (IOperation oper in operations)
+                        if (input.KeyChar.IsOneOf('q', 'Q'))
                         {
-                            if (oper.OperatorChar == input.KeyChar)
-                            {
-                                Console.WriteLine(input.KeyChar);
-                                correctKey = true;
-
-                                currentOperation = oper;
-                                break;
-                            }
+                            exitPressed = true;
+                            break;
                         }
-                    }
 
-                    if (currentOperation.OperatorChar.IsOneOf('q', '#'))
+                        var operQuery =
+                            (from oper in operations
+                            where (oper.OperatorChar == input.KeyChar)
+                            select oper).ToList();
+
+                        if (operQuery.Count != 0)
+                        {
+                            Console.WriteLine(input.KeyChar);
+                            correctKey = true;
+
+                            currentOperation = operQuery[0];
+                            break;
+                        }
+                    } while (!correctKey);
+
+                    if (currentOperation.OperatorChar.IsOneOf('#'))
                     {
-                        currentOperation.Run();
+                        currentOperation.Run(mathBuffer);
                         getNextOperationInsteadNumber = true;
                     }
-
-                    if (exitPressed)
-                        return;
-
                 } while (getNextOperationInsteadNumber);
-
-                GetNumber();
-            } while (!exitPressed);
+            }
         }
 
-        private static void GetNumber()
+        private void GetNumber()
         {
             Console.Write("> ");
-            double value = 0;
+            double input = 0;
 
-            while (!double.TryParse(Console.ReadLine(), out value))
+            while (!double.TryParse(Console.ReadLine(), out input))
             {
                 Tools.Interface.CleanPreviousLine(2);
             }
 
-            MathBuffer.TempValue = value;
+            mathBuffer.TempValue = input;
 
             if (currentOperation == null)
             {
-                MathBuffer.AccValue = MathBuffer.TempValue;
+                mathBuffer.AccValue = mathBuffer.TempValue;
                 return;
             }
 
-            currentOperation.Run();
+            currentOperation.Run(mathBuffer);
         }
     }
 }

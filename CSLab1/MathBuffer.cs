@@ -7,9 +7,22 @@ using System.Threading.Tasks;
 namespace CSLab1
 {
 
-    static class MathBuffer
+    class MathBuffer
     {
-        public static double AccValue
+        public List<double> buffer;
+
+        private double tempValue;
+        private double accValue;
+
+        public MathBuffer()
+        {
+            buffer = new List<double>();
+            tempValue = 0;
+            accValue = 0;
+        }
+
+        public double TempValue { get => tempValue; set => tempValue = value; }
+        public double AccValue
         {
             get => accValue;
             set
@@ -20,11 +33,5 @@ namespace CSLab1
                 Console.WriteLine("[#{0}] = {1}", buffer.Count, value);
             }
         }
-        public static double TempValue { get => tempValue; set => tempValue = value; }
-
-        private static double tempValue = 0;
-        public static List<double> buffer = new List<double>();
-
-        private static double accValue = 0;
     }
 }

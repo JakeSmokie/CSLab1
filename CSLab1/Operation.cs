@@ -10,71 +10,70 @@ namespace CSLab1.Operations
     {
         char OperatorChar { get; }
 
-        void Run();
+        void Run(MathBuffer mathBuffer);
     }
 
     class Add : IOperation
     {
         public char OperatorChar { get => '+'; }
-        public void Run()
+        public void Run(MathBuffer mathBuffer)
         {
-            MathBuffer.AccValue += MathBuffer.TempValue;
+            mathBuffer.AccValue += mathBuffer.TempValue;
         }
     }
     class Sub : IOperation
     {
         public char OperatorChar { get => '-'; }
-        public void Run()
+        public void Run(MathBuffer mathBuffer)
         {
-            MathBuffer.AccValue -= MathBuffer.TempValue;
+            mathBuffer.AccValue -= mathBuffer.TempValue;
         }
     }
     class Div : IOperation
     {
         public char OperatorChar { get => '/'; }
-        public void Run()
+        public void Run(MathBuffer mathBuffer)
         {
-            if (MathBuffer.TempValue.IsOneOf(0.0, -0.0))
+            if (mathBuffer.TempValue.IsOneOf(0.0, -0.0))
             {
-                Console.WriteLine(" * * * Error! Dividing by zero!  * * * ");
-                return;
+                throw new Exception("Dividing by zero!");
             }
 
-            MathBuffer.AccValue /= MathBuffer.TempValue;
+            mathBuffer.AccValue /= mathBuffer.TempValue;
         }
     }
     class Mul : IOperation
     {
         public char OperatorChar { get => '*'; }
-        public void Run()
+        public void Run(MathBuffer mathBuffer)
         {
-            MathBuffer.AccValue *= MathBuffer.TempValue;
+            mathBuffer.AccValue *= mathBuffer.TempValue;
         }
     }
     class Jump : IOperation
     {
         public char OperatorChar { get => '#'; }
-        public void Run()
+        public void Run(MathBuffer mathBuffer)
         {
             int value = 0;
             bool success = false;
 
-            while (!success || value <= 0 || value > MathBuffer.buffer.Count)
+            while (!success || value <= 0 || value > mathBuffer.buffer.Count)
             {
                 Tools.Interface.CleanPreviousLine(4);
                 success = int.TryParse(Console.ReadLine(), out value);
             }
 
-            MathBuffer.AccValue = MathBuffer.buffer[value - 1];
+            mathBuffer.AccValue = mathBuffer.buffer[value - 1];
         }
     }
-    class Exit : IOperation
+    /*class Exit : IOperation
     {
         public char OperatorChar { get => 'q'; }
-        public void Run()
+        public void Run(MathBuffer mathBuffer)
         {
             Console.Beep(880, 1000);
             Processing.exitPressed = true;
         }
-    }
+    }*/
 }

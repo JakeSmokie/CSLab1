@@ -58,13 +58,13 @@ namespace CSLab1.Operations
             int value = 0;
             bool success = false;
 
-            while (!success || value <= 0 || value > mathBuffer.buffer.Count)
+            while (!success || value <= 0 || value > mathBuffer.Buffer.Count)
             {
                 Tools.Interface.CleanPreviousLine(4);
                 success = int.TryParse(Console.ReadLine(), out value);
             }
 
-            mathBuffer.AccValue = mathBuffer.buffer[value - 1];
+            mathBuffer.AccValue = mathBuffer.Buffer[value - 1];
         }
     }
     /*class Exit : IOperation

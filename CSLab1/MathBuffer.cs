@@ -9,14 +9,14 @@ namespace CSLab1
 
     class MathBuffer
     {
-        public List<double> buffer;
+        private List<double> valuesBuffer;
 
         private double tempValue;
         private double accValue;
 
         public MathBuffer()
         {
-            buffer = new List<double>();
+            valuesBuffer = new List<double>();
             tempValue = 0;
             accValue = 0;
         }
@@ -28,10 +28,12 @@ namespace CSLab1
             set
             {
                 accValue = value;
-                buffer.Add(value);
+                valuesBuffer.Add(value);
 
-                Console.WriteLine("[#{0}] = {1}", buffer.Count, value);
+                Console.WriteLine("[#{0}] = {1}", valuesBuffer.Count, value);
             }
         }
+
+        public List<double> Buffer { get => valuesBuffer; }
     }
 }

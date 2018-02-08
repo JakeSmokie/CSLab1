@@ -36,7 +36,7 @@ namespace CSLab1
 
             GetNumber();
 
-            while (!exitPressed)
+            do
             {
                 bool getNextOperationInsteadNumber;
 
@@ -64,7 +64,7 @@ namespace CSLab1
                         }
                     }
 
-                    if (currentOperation.OperatorChar == 'q' || currentOperation.OperatorChar == '#')
+                    if (currentOperation.OperatorChar.IsOneOf('q', '#'))
                     {
                         currentOperation.Run();
                         getNextOperationInsteadNumber = true;
@@ -76,7 +76,7 @@ namespace CSLab1
                 } while (getNextOperationInsteadNumber);
 
                 GetNumber();
-            }
+            } while (!exitPressed);
         }
 
         private static void GetNumber()

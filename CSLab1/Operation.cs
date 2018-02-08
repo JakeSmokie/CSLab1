@@ -34,6 +34,12 @@ namespace CSLab1.Operations
         public char OperatorChar { get => '/'; }
         public void Run()
         {
+            if (MathBuffer.TempValue.IsOneOf(0.0, -0.0))
+            {
+                Console.WriteLine(" * * * Error! Dividing by zero!  * * * ");
+                return;
+            }
+
             MathBuffer.AccValue /= MathBuffer.TempValue;
         }
     }

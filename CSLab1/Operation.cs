@@ -55,16 +55,16 @@ namespace CSLab1.Operations
         public char OperatorChar { get => '#'; }
         public void Run(MathBuffer mathBuffer)
         {
-            int value = 0;
+            int input = 0;
             bool success = false;
 
-            while (!success || value <= 0 || value > mathBuffer.Buffer.Count)
+            while (!success || input <= 0 || input > mathBuffer.Buffer.Count)
             {
                 Tools.Interface.CleanPreviousLine(4);
-                success = int.TryParse(Console.ReadLine(), out value);
+                success = int.TryParse(Console.ReadLine(), out input);
             }
 
-            mathBuffer.AccValue = mathBuffer.Buffer[value - 1];
+            mathBuffer.AccValue = mathBuffer.Buffer[input - 1];
         }
     }
     /*class Exit : IOperation

@@ -34,11 +34,11 @@ namespace CSLab1
         {
             Console.WriteLine(
                 "Usage:\n" +
-                "       when first symbol on line is ‘>’ – enter operand(number)\n" +
-                "       when first symbol on line is ‘@’ – enter operation\n" +
-                "       operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-                "           ‘#’ followed with number of evaluation step\n" +
-                "           ‘q’ to exit\n");
+                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
+                "  when first symbol on line is ‘@’ – enter operation\n" +
+                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
+                "    ‘#’ followed with number of evaluation step\n" +
+                "    ‘q’ to exit\n");
 
             bool getNextOperationInsteadNumber;
             bool correctKey;

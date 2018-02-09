@@ -6,7 +6,7 @@ using System.Linq;
 namespace CSLab1
 {
     class Processing
-    {
+    { 
         private bool exitPressed;
 
         private List<IOperation> operations;

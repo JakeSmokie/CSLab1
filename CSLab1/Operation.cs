@@ -10,29 +10,31 @@ namespace CSLab1.Operations
     {
         char OperatorChar { get; }
 
-        void Run(MathBuffer mathBuffer);
+        ProcessingFlags Run(MathBuffer mathBuffer);
     }
 
     class Add : IOperation
     {
         public char OperatorChar { get => '+'; }
-        public void Run(MathBuffer mathBuffer)
+        public ProcessingFlags Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue += mathBuffer.TempValue;
+            return ProcessingFlags.None;
         }
     }
     class Sub : IOperation
     {
         public char OperatorChar { get => '-'; }
-        public void Run(MathBuffer mathBuffer)
+        public ProcessingFlags Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue -= mathBuffer.TempValue;
+            return ProcessingFlags.None;
         }
     }
     class Div : IOperation
     {
         public char OperatorChar { get => '/'; }
-        public void Run(MathBuffer mathBuffer)
+        public ProcessingFlags Run(MathBuffer mathBuffer)
         {
             if (mathBuffer.TempValue.IsOneOf(0.0, -0.0))
             {
@@ -40,20 +42,22 @@ namespace CSLab1.Operations
             }
 
             mathBuffer.AccValue /= mathBuffer.TempValue;
+            return ProcessingFlags.None;
         }
     }
     class Mul : IOperation
     {
         public char OperatorChar { get => '*'; }
-        public void Run(MathBuffer mathBuffer)
+        public ProcessingFlags Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue *= mathBuffer.TempValue;
+            return ProcessingFlags.None;
         }
     }
     class Jump : IOperation
     {
         public char OperatorChar { get => '#'; }
-        public void Run(MathBuffer mathBuffer)
+        public ProcessingFlags Run(MathBuffer mathBuffer)
         {
             int input = 0;
             bool success = false;
@@ -65,15 +69,29 @@ namespace CSLab1.Operations
             }
 
             mathBuffer.AccValue = mathBuffer.Buffer[input - 1];
+            return ProcessingFlags.None;
         }
     }
-    /*class Exit : IOperation
+
+    class Exit : IOperation
     {
         public char OperatorChar { get => 'q'; }
-        public void Run(MathBuffer mathBuffer)
+        public ProcessingFlags Run(MathBuffer mathBuffer)
         {
             Console.Beep(880, 1000);
-            Processing.exitPressed = true;
+            return  ProcessingFlags.Exit |
+                    ProcessingFlags.SkipNumber |
+                    ProcessingFlags.SkipOperation;
         }
-    }*/
+    }
+
+    class SaveInput : IOperation
+    {
+        public char OperatorChar { get => '0'; }
+        public ProcessingFlags Run(MathBuffer mathBuffer)
+        {
+            mathBuffer.AccValue = mathBuffer.TempValue;
+            return ProcessingFlags.None;
+        }
+    }
 }

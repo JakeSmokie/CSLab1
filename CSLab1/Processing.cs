@@ -6,8 +6,8 @@ using System.Linq;
 namespace CSLab1
 {
     class Processing
-    { 
-        private bool exitPressed;
+    {
+        private ProcessingFlags operationResult;
 
         private List<IOperation> operations;
         private IOperation currentOperation;
@@ -15,8 +15,8 @@ namespace CSLab1
 
         public Processing()
         {
-            exitPressed = false;
-            currentOperation = null;
+            operationResult = ProcessingFlags.None;
+            currentOperation = new SaveInput();
 
             operations = new List<IOperation>
             {
@@ -24,7 +24,8 @@ namespace CSLab1
                 new Sub(),
                 new Div(),
                 new Mul(),
-                new Jump()
+                new Jump(),
+                new Exit()
             };
 
             mathBuffer = new MathBuffer();
@@ -42,27 +43,27 @@ namespace CSLab1
 
             do
             {
-                GetNumber();
-
-                if (currentOperation == null)
+                if (!operationResult.HasFlag(ProcessingFlags.SkipNumber))
                 {
-                    mathBuffer.AccValue = mathBuffer.TempValue;
-                }
-                else
-                {
-                    currentOperation.Run(mathBuffer);
+                    GetNumber();
                 }
 
-                GetOperation();
-            } while (!exitPressed);
+                operationResult = currentOperation.Run(mathBuffer);
+
+                if (!operationResult.HasFlag(ProcessingFlags.SkipOperation))
+                {
+                    GetOperation();
+                }
+
+            } while (!operationResult.HasFlag(ProcessingFlags.Exit));
         }
 
         private void GetNumber()
         {
             Console.Write("> ");
-            double input = 0;
+            decimal input = 0;
 
-            while (!double.TryParse(Console.ReadLine(), out input))
+            while (!decimal.TryParse(Console.ReadLine(), out input))
             {
                 Tools.Interface.CleanPreviousLine(2);
             }
@@ -72,44 +73,29 @@ namespace CSLab1
 
         private void GetOperation()
         {
-            bool getNextOperationInsteadNumber;
-            bool correctKey;
+            bool correctKey = false;
+
+            Console.Write("@: ");
 
             do
             {
-                getNextOperationInsteadNumber = false;
-                correctKey = false;
+                ConsoleKeyInfo input = Console.ReadKey(true);
 
-                Console.Write("@: ");
+                var oper = operations.Find(x => x.OperatorChar == input.KeyChar);
 
-                do
+                if (oper != null)
                 {
-                    ConsoleKeyInfo input = Console.ReadKey(true);
+                    Console.WriteLine(input.KeyChar);
+                    correctKey = true;
 
-                    if (input.Key == ConsoleKey.Q)
-                    {
-                        exitPressed = true;
-                        return;
-                    }
-
-                    var oper = operations.Find(x => x.OperatorChar == input.KeyChar);
-
-                    if (oper != null)
-                    {
-                        Console.WriteLine(input.KeyChar);
-                        correctKey = true;
-
-                        currentOperation = oper;
-                    }
-                } while (!correctKey);
-
-                if (currentOperation.OperatorChar.IsOneOf('#'))
-                {
-                    currentOperation.Run(mathBuffer);
-                    getNextOperationInsteadNumber = true;
+                    currentOperation = oper;
                 }
+            } while (!correctKey);
 
-            } while (getNextOperationInsteadNumber);
+            if (currentOperation.OperatorChar.IsOneOf('#', 'q'))
+            {
+                operationResult |= ProcessingFlags.SkipNumber;
+            }
         }
     }
 }

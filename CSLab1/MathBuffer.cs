@@ -9,20 +9,18 @@ namespace CSLab1
 
     class MathBuffer
     {
-        private List<double> valuesBuffer;
-
-        private double tempValue;
-        private double accValue;
+        private List<decimal> valuesBuffer;
+        private decimal accValue;
 
         public MathBuffer()
         {
-            valuesBuffer = new List<double>();
-            tempValue = 0;
+            valuesBuffer = new List<decimal>();
             accValue = 0;
+            TempValue = 0;
         }
 
-        public double TempValue { get => tempValue; set => tempValue = value; }
-        public double AccValue
+        public decimal TempValue { get; set; }
+        public decimal AccValue
         {
             get => accValue;
             set
@@ -34,6 +32,6 @@ namespace CSLab1
             }
         }
 
-        public List<double> Buffer { get => valuesBuffer; }
+        public List<decimal> Buffer { get => valuesBuffer; }
     }
 }

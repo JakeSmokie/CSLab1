@@ -64,17 +64,19 @@ namespace CSLab1
                             break;
                         }
 
-                        var operQuery =
-                            (from oper in operations
-                            where (oper.OperatorChar == input.KeyChar)
-                            select oper).ToList();
+                        //var operQuery =
+                        //    (from oper in operations
+                        //    where (oper.OperatorChar == input.KeyChar)
+                        //    select oper).ToList();
 
-                        if (operQuery.Count != 0)
+                        var oper = operations.Find(x => x.OperatorChar == input.KeyChar);
+
+                        if (oper != null)
                         {
                             Console.WriteLine(input.KeyChar);
                             correctKey = true;
 
-                            currentOperation = operQuery[0];
+                            currentOperation = oper;
                             break;
                         }
                     } while (!correctKey);

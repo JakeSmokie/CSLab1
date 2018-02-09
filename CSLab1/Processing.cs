@@ -40,54 +40,21 @@ namespace CSLab1
                 "    ‘#’ followed with number of evaluation step\n" +
                 "    ‘q’ to exit\n");
 
-            bool getNextOperationInsteadNumber;
-            bool correctKey;
-
-            while (!exitPressed)
+            do
             {
                 GetNumber();
 
-                do
+                if (currentOperation == null)
                 {
-                    getNextOperationInsteadNumber = false;
-                    correctKey = false;
+                    mathBuffer.AccValue = mathBuffer.TempValue;
+                }
+                else
+                {
+                    currentOperation.Run(mathBuffer);
+                }
 
-                    Console.Write("@: ");
-
-                    do
-                    {
-                        ConsoleKeyInfo input = Console.ReadKey(true);
-
-                        if (input.KeyChar.IsOneOf('q', 'Q'))
-                        {
-                            exitPressed = true;
-                            break;
-                        }
-
-                        //var operQuery =
-                        //    (from oper in operations
-                        //    where (oper.OperatorChar == input.KeyChar)
-                        //    select oper).ToList();
-
-                        var oper = operations.Find(x => x.OperatorChar == input.KeyChar);
-
-                        if (oper != null)
-                        {
-                            Console.WriteLine(input.KeyChar);
-                            correctKey = true;
-
-                            currentOperation = oper;
-                            break;
-                        }
-                    } while (!correctKey);
-
-                    if (currentOperation.OperatorChar.IsOneOf('#'))
-                    {
-                        currentOperation.Run(mathBuffer);
-                        getNextOperationInsteadNumber = true;
-                    }
-                } while (getNextOperationInsteadNumber);
-            }
+                GetOperation();
+            } while (!exitPressed);
         }
 
         private void GetNumber()
@@ -101,14 +68,48 @@ namespace CSLab1
             }
 
             mathBuffer.TempValue = input;
+        }
 
-            if (currentOperation == null)
+        private void GetOperation()
+        {
+            bool getNextOperationInsteadNumber;
+            bool correctKey;
+
+            do
             {
-                mathBuffer.AccValue = mathBuffer.TempValue;
-                return;
-            }
+                getNextOperationInsteadNumber = false;
+                correctKey = false;
 
-            currentOperation.Run(mathBuffer);
+                Console.Write("@: ");
+
+                do
+                {
+                    ConsoleKeyInfo input = Console.ReadKey(true);
+
+                    if (input.Key == ConsoleKey.Q)
+                    {
+                        exitPressed = true;
+                        return;
+                    }
+
+                    var oper = operations.Find(x => x.OperatorChar == input.KeyChar);
+
+                    if (oper != null)
+                    {
+                        Console.WriteLine(input.KeyChar);
+                        correctKey = true;
+
+                        currentOperation = oper;
+                    }
+                } while (!correctKey);
+
+                if (currentOperation.OperatorChar.IsOneOf('#'))
+                {
+                    currentOperation.Run(mathBuffer);
+                    getNextOperationInsteadNumber = true;
+                }
+
+            } while (getNextOperationInsteadNumber);
         }
     }
 }

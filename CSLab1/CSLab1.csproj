@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="ProcessingFlags.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="MathBuffer.cs" />
     <Compile Include="Operation.cs" />

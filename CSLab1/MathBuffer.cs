@@ -11,15 +11,33 @@ namespace CSLab1
     {
         private List<decimal> valuesBuffer;
         private decimal accValue;
+        private decimal tempValue;
 
         public MathBuffer()
         {
             valuesBuffer = new List<decimal>();
             accValue = 0;
-            TempValue = 0;
+            tempValue = 0;
         }
 
-        public decimal TempValue { get; set; }
+        public decimal TempValue
+        {
+            get
+            {
+                Console.Write("> ");
+                decimal input = 0;
+
+                while (!decimal.TryParse(Console.ReadLine(), out input))
+                {
+                    Tools.Interface.CleanPreviousLine(2);
+                }
+
+                tempValue = input;
+                return tempValue;
+            }
+            set => tempValue = value;
+        }
+        
         public decimal AccValue
         {
             get => accValue;

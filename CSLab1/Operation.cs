@@ -6,58 +6,79 @@ using System.Threading.Tasks;
 
 namespace CSLab1.Operations
 {
+    public delegate void Del();
+
     interface IOperation
     {
         char OperatorChar { get; }
 
-        ProcessingFlags Run(MathBuffer mathBuffer);
+        bool Run(MathBuffer mathBuffer, Del operation);
     }
 
     class Add : IOperation
     {
         public char OperatorChar { get => '+'; }
-        public ProcessingFlags Run(MathBuffer mathBuffer)
+        public bool Run(MathBuffer mathBuffer, Del operation)
         {
             mathBuffer.AccValue += mathBuffer.TempValue;
-            return ProcessingFlags.None;
+            operation();
+
+            return false;
         }
     }
     class Sub : IOperation
     {
         public char OperatorChar { get => '-'; }
-        public ProcessingFlags Run(MathBuffer mathBuffer)
+        public bool Run(MathBuffer mathBuffer, Del operation)
         {
             mathBuffer.AccValue -= mathBuffer.TempValue;
-            return ProcessingFlags.None;
+            operation();
+
+            return false;
         }
     }
     class Div : IOperation
     {
         public char OperatorChar { get => '/'; }
-        public ProcessingFlags Run(MathBuffer mathBuffer)
+        public bool Run(MathBuffer mathBuffer, Del operation)
         {
-            if (mathBuffer.TempValue.IsOneOf(0.0, -0.0))
-            {
-                throw new Exception("Dividing by zero!");
-            }
+            bool exception;
 
-            mathBuffer.AccValue /= mathBuffer.TempValue;
-            return ProcessingFlags.None;
+            do
+            {
+                exception = false;
+                decimal input = mathBuffer.TempValue;
+
+                try
+                {
+                    mathBuffer.AccValue /= input;
+                }
+                catch (DivideByZeroException e)
+                {
+                    Console.WriteLine(e.Message);
+                    exception = true;
+                }
+            } while (exception);
+
+            operation();
+            return false;
         }
     }
     class Mul : IOperation
     {
         public char OperatorChar { get => '*'; }
-        public ProcessingFlags Run(MathBuffer mathBuffer)
+        public bool Run(MathBuffer mathBuffer, Del operation)
         {
             mathBuffer.AccValue *= mathBuffer.TempValue;
-            return ProcessingFlags.None;
+            operation();
+
+            return false;
         }
     }
     class Jump : IOperation
     {
         public char OperatorChar { get => '#'; }
-        public ProcessingFlags Run(MathBuffer mathBuffer)
+        public bool Run(MathBuffer mathBuffer, Del operation)
         {
             int input = 0;
             bool success = false;
@@ -69,29 +90,31 @@ namespace CSLab1.Operations
             }
 
             mathBuffer.AccValue = mathBuffer.Buffer[input - 1];
-            return ProcessingFlags.None;
+            operation();
+
+            return false;
         }
     }
 
     class Exit : IOperation
     {
         public char OperatorChar { get => 'q'; }
-        public ProcessingFlags Run(MathBuffer mathBuffer)
+        public bool Run(MathBuffer mathBuffer, Del operation)
         {
             Console.Beep(880, 1000);
-            return  ProcessingFlags.Exit |
-                    ProcessingFlags.SkipNumber |
-                    ProcessingFlags.SkipOperation;
+            return  true;
         }
     }
 
     class SaveInput : IOperation
     {
         public char OperatorChar { get => '0'; }
-        public ProcessingFlags Run(MathBuffer mathBuffer)
+        public bool Run(MathBuffer mathBuffer, Del operation)
         {
             mathBuffer.AccValue = mathBuffer.TempValue;
-            return ProcessingFlags.None;
+            operation();
+
+            return false;
         }
     }
 }

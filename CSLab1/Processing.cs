@@ -7,15 +7,12 @@ namespace CSLab1
 {
     class Processing
     {
-        private ProcessingFlags operationResult;
-
         private List<IOperation> operations;
         private IOperation currentOperation;
         private MathBuffer mathBuffer;
 
         public Processing()
         {
-            operationResult = ProcessingFlags.None;
             currentOperation = new SaveInput();
 
             operations = new List<IOperation>
@@ -41,34 +38,12 @@ namespace CSLab1
                 "    ‘#’ followed with number of evaluation step\n" +
                 "    ‘q’ to exit\n");
 
+            bool exit = false;
+
             do
             {
-                if (!operationResult.HasFlag(ProcessingFlags.SkipNumber))
-                {
-                    GetNumber();
-                }
-
-                operationResult = currentOperation.Run(mathBuffer);
-
-                if (!operationResult.HasFlag(ProcessingFlags.SkipOperation))
-                {
-                    GetOperation();
-                }
-
-            } while (!operationResult.HasFlag(ProcessingFlags.Exit));
-        }
-
-        private void GetNumber()
-        {
-            Console.Write("> ");
-            decimal input = 0;
-
-            while (!decimal.TryParse(Console.ReadLine(), out input))
-            {
-                Tools.Interface.CleanPreviousLine(2);
-            }
-
-            mathBuffer.TempValue = input;
+                exit = currentOperation.Run(mathBuffer, GetOperation);
+            } while (!exit);
         }
 
         private void GetOperation()
@@ -91,11 +66,6 @@ namespace CSLab1
                     currentOperation = oper;
                 }
             } while (!correctKey);
-
-            if (currentOperation.OperatorChar.IsOneOf('#', 'q'))
-            {
-                operationResult |= ProcessingFlags.SkipNumber;
-            }
         }
     }
 }

@@ -44,7 +44,14 @@
   <ItemGroup>
     <Compile Include="Extensions.cs" />
     <Compile Include="MathBuffer.cs" />
-    <Compile Include="Operation.cs" />
+    <Compile Include="Operations\Add.cs" />
+    <Compile Include="Operations\Div.cs" />
+    <Compile Include="Operations\Exit.cs" />
+    <Compile Include="Operations\IOperation.cs" />
+    <Compile Include="Operations\Jump.cs" />
+    <Compile Include="Operations\Mul.cs" />
+    <Compile Include="Operations\SaveInput.cs" />
+    <Compile Include="Operations\Sub.cs" />
     <Compile Include="Processing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

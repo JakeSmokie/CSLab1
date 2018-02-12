@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CSLab1.Operations
+{
+    class Div : IOperation
+    {
+        public char OperatorChar { get => '/'; }
+        public bool Run(MathBuffer mathBuffer)
+        {
+            bool exception;
+
+            do
+            {
+                exception = false;
+                decimal input = mathBuffer.TempValue;
+
+                try
+                {
+                    mathBuffer.AccValue /= input;
+                }
+                catch (DivideByZeroException e)
+                {
+                    Console.WriteLine(e.Message);
+                    exception = true;
+                }
+            } while (exception);
+
+            return false;
+        }
+    }
+}

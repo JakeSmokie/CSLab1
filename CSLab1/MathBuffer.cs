@@ -29,7 +29,7 @@ namespace CSLab1
 
                 while (!decimal.TryParse(Console.ReadLine(), out input))
                 {
-                    Tools.Interface.CleanPreviousLine(2);
+                    Utils.CleanPreviousLine(2);
                 }
 
                 tempValue = input;

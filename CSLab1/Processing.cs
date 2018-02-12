@@ -42,7 +42,12 @@ namespace CSLab1
 
             do
             {
-                exit = currentOperation.Run(mathBuffer, GetOperation);
+                exit = currentOperation.Run(mathBuffer);
+
+                if (!currentOperation.OperatorChar.IsOneOf('q'))
+                {
+                    GetOperation();
+                }
             } while (!exit);
         }
 

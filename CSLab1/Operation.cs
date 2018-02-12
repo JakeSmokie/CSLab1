@@ -12,35 +12,31 @@ namespace CSLab1.Operations
     {
         char OperatorChar { get; }
 
-        bool Run(MathBuffer mathBuffer, Del operation);
+        bool Run(MathBuffer mathBuffer);
     }
 
     class Add : IOperation
     {
-        public char OperatorChar { get => '+'; }
-        public bool Run(MathBuffer mathBuffer, Del operation)
+        public char OperatorChar => '+';
+        public bool Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue += mathBuffer.TempValue;
-            operation();
-
             return false;
         }
     }
     class Sub : IOperation
     {
-        public char OperatorChar { get => '-'; }
-        public bool Run(MathBuffer mathBuffer, Del operation)
+        public char OperatorChar => '-';
+        public bool Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue -= mathBuffer.TempValue;
-            operation();
-
             return false;
         }
     }
     class Div : IOperation
     {
         public char OperatorChar { get => '/'; }
-        public bool Run(MathBuffer mathBuffer, Del operation)
+        public bool Run(MathBuffer mathBuffer)
         {
             bool exception;
 
@@ -60,38 +56,33 @@ namespace CSLab1.Operations
                 }
             } while (exception);
 
-            operation();
             return false;
         }
     }
     class Mul : IOperation
     {
         public char OperatorChar { get => '*'; }
-        public bool Run(MathBuffer mathBuffer, Del operation)
+        public bool Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue *= mathBuffer.TempValue;
-            operation();
-
             return false;
         }
     }
     class Jump : IOperation
     {
         public char OperatorChar { get => '#'; }
-        public bool Run(MathBuffer mathBuffer, Del operation)
+        public bool Run(MathBuffer mathBuffer)
         {
             int input = 0;
             bool success = false;
 
             while (!success || input <= 0 || input > mathBuffer.Buffer.Count)
             {
-                Tools.Interface.CleanPreviousLine(4);
+                Utils.CleanPreviousLine(4);
                 success = int.TryParse(Console.ReadLine(), out input);
             }
 
             mathBuffer.AccValue = mathBuffer.Buffer[input - 1];
-            operation();
-
             return false;
         }
     }
@@ -99,7 +90,7 @@ namespace CSLab1.Operations
     class Exit : IOperation
     {
         public char OperatorChar { get => 'q'; }
-        public bool Run(MathBuffer mathBuffer, Del operation)
+        public bool Run(MathBuffer mathBuffer)
         {
             Console.Beep(880, 1000);
             return  true;
@@ -108,12 +99,10 @@ namespace CSLab1.Operations
 
     class SaveInput : IOperation
     {
-        public char OperatorChar { get => '0'; }
-        public bool Run(MathBuffer mathBuffer, Del operation)
+        public char OperatorChar => '0';
+        public bool Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue = mathBuffer.TempValue;
-            operation();
-
             return false;
         }
     }

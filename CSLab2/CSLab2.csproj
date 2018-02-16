@@ -42,8 +42,10 @@
     <Compile Include="Operations\Div.cs" />
     <Compile Include="Operations\Exit.cs" />
     <Compile Include="Operations\Jump.cs" />
+    <Compile Include="Operations\Load.cs" />
     <Compile Include="Operations\Mul.cs" />
-    <Compile Include="Operations\SaveInput.cs" />
+    <Compile Include="Operations\Save.cs" />
+    <Compile Include="Operations\SaveNumber.cs" />
     <Compile Include="Operations\Sub.cs" />
     <Compile Include="Processing.cs" />
     <Compile Include="Program.cs" />

@@ -4,16 +4,6 @@ using System.Collections.Generic;
 
 namespace CSLab1
 {
-    class Instruction
-    {
-        public delegate void Action();
-        private Action action;
-
-        public Instruction(Action a)
-        {
-            action = a;
-        }
-    }
     class Processing
     {
         private List<IOperation> operations;
@@ -22,7 +12,7 @@ namespace CSLab1
 
         public Processing()
         {
-            currentOperation = new SaveInput();
+            currentOperation = new SaveNumber();
 
             operations = new List<IOperation>
             {
@@ -31,7 +21,9 @@ namespace CSLab1
                 new Div(),
                 new Mul(),
                 new Jump(),
-                new Exit()
+                new Exit(),
+                new Save(),
+                new Load()
             };
 
             mathBuffer = new MathBuffer();

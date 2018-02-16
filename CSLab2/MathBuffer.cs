@@ -43,7 +43,7 @@ namespace CSLab1
                 accValue = value;
                 valuesBuffer.Add(value);
 
-                Console.WriteLine("[#{0}] = {1}", valuesBuffer.Count, value);
+                Console.WriteLine($"[#{ valuesBuffer.Count }] = { value }");
             }
         }
 

@@ -1,6 +1,6 @@
-﻿namespace CSLab1.Operations
+﻿namespace CSLabs.Operations
 {
-    class SaveNumber : IOperation
+    public class SaveNumber : IOperation
     {
         public char OperatorChar => '\0';
         public bool Run(MathBuffer mathBuffer)

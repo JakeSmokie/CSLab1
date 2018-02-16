@@ -1,6 +1,6 @@
-﻿namespace CSLab1.Operations
+﻿namespace CSLabs.Operations
 {
-    class Sub : IOperation
+    public class Sub : IOperation
     {
         public char OperatorChar => '-';
         public bool Run(MathBuffer mathBuffer)

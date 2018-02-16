@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CSLab1
+namespace CSLabs
 {
-    static class Utils
+    public static class Utils
     {
         public static void CleanPreviousLine(int offset)
         {

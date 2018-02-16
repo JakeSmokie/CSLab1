@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSLab1.Operations
+namespace CSLabs.Operations
 {
-    class Add : IOperation
+    public class Add : IOperation
     {
         public char OperatorChar => '+';
         public bool Run(MathBuffer mathBuffer)

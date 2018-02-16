@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CSLab1.Operations
+namespace CSLabs.Operations
 {
-    class Exit : IOperation
+    public class Exit : IOperation
     {
         public char OperatorChar { get => 'q'; }
         public bool Run(MathBuffer mathBuffer)

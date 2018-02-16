@@ -1,4 +1,4 @@
-﻿namespace CSLab1
+﻿namespace CSLabs
 {
     sealed class Program
     {

@@ -1,8 +1,8 @@
-﻿using CSLab1.Operations;
+﻿using CSLabs.Operations;
 using System;
 using System.Collections.Generic;
 
-namespace CSLab1
+namespace CSLabs
 {
     class Processing
     {
@@ -12,7 +12,7 @@ namespace CSLab1
 
         public Processing()
         {
-            currentOperation = new SaveInput();
+            currentOperation = new SaveNumber();
 
             operations = new List<IOperation>
             {

@@ -1,8 +1,8 @@
-﻿using CSLab1.Operations;
+﻿using CSLabs.Operations;
 using System;
 using System.Collections.Generic;
 
-namespace CSLab1
+namespace CSLabs
 {
     class Processing
     {
@@ -63,7 +63,7 @@ namespace CSLab1
                 ConsoleKeyInfo input = Console.ReadKey(true);
 
                 var oper = operations.Find(x => x.OperatorChar == input.KeyChar);
-
+             
                 if (oper != null)
                 {
                     Console.WriteLine(input.KeyChar);

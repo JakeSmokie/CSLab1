@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CSLab1
+namespace CSLabs
 {
     public static class Extensions
     {

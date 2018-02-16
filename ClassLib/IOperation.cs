@@ -1,6 +1,6 @@
-﻿namespace CSLab1.Operations
+﻿namespace CSLabs.Operations
 {
-    interface IOperation
+    public interface IOperation
     {
         char OperatorChar { get; }
 

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CSLab1.Operations
+namespace CSLabs.Operations
 {
-    class Div : IOperation
+    public class Div : IOperation
     {
         public char OperatorChar { get => '/'; }
         public bool Run(MathBuffer mathBuffer)

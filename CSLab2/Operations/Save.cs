@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSLab1.Operations
+namespace CSLabs.Operations
 {
     class Save : IOperation
     {

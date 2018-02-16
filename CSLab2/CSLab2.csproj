@@ -35,21 +35,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="IOperation.cs" />
-    <Compile Include="MathBuffer.cs" />
-    <Compile Include="Operations\Add.cs" />
-    <Compile Include="Operations\Div.cs" />
-    <Compile Include="Operations\Exit.cs" />
-    <Compile Include="Operations\Jump.cs" />
     <Compile Include="Operations\Load.cs" />
-    <Compile Include="Operations\Mul.cs" />
     <Compile Include="Operations\Save.cs" />
-    <Compile Include="Operations\SaveNumber.cs" />
-    <Compile Include="Operations\Sub.cs" />
     <Compile Include="Processing.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLib\ClassLib.csproj">
+      <Project>{9f183cd3-74c5-46b4-b4ce-bd6d4af00ef1}</Project>
+      <Name>ClassLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

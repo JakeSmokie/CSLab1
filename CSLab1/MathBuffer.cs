@@ -31,7 +31,7 @@ namespace CSLab1
                 {
                     Utils.CleanPreviousLine(2);
                 }
-
+                 
                 tempValue = input;
                 return tempValue;
             }

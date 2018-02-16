@@ -8,7 +8,7 @@ namespace CSLabs.Operations
         public bool Run(MathBuffer mathBuffer)
         {
             Console.Beep(880, 1000);
-            return true;
+            return false;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace CSLabs.Operations
         public bool Run(MathBuffer mathBuffer)
         {
             mathBuffer.AccValue += mathBuffer.TempValue;
-            return false;
+            return true;
         }
     }
 }

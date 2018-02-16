@@ -7,7 +7,7 @@ namespace CSLabs.Operations
         public char OperatorChar { get => 's'; }
         public bool Run(MathBuffer mathBuffer)
         {
-            return false;
+            return true;
         }
     }
 }

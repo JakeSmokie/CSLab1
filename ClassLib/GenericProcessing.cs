@@ -43,17 +43,10 @@ namespace ClassLib
                 "    ‘#’ followed with number of evaluation step\n" +
                 "    ‘q’ to exit\n");
 
-            bool exit = false;
-
-            do
+            while (currentOperation.Run(mathBuffer))
             {
-                exit = currentOperation.Run(mathBuffer);
-
-                if (!currentOperation.OperatorChar.IsOneOf('q'))
-                {
-                    currentOperation = parser.Read(operations);
-                }
-            } while (!exit);
+                currentOperation = parser.Read(operations);
+            } 
         }
     }
 }

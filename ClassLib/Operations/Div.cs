@@ -25,7 +25,7 @@ namespace CSLabs.Operations
                 }
             } while (exception);
 
-            return false;
+            return true;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace CSLabs.Operations
             }
 
             mathBuffer.AccValue = mathBuffer.Buffer[input - 1];
-            return false;
+            return true;
         }
     }
 }

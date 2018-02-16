@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSLabs.Operations
+﻿namespace CSLabs.Operations
 {
     class Save : IOperation
     {

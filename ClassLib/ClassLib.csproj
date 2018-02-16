@@ -39,6 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
+    <Compile Include="GenericProcessing.cs" />
+    <Compile Include="OperationsParser.cs" />
     <Compile Include="Operations\IOperation.cs" />
     <Compile Include="MathBuffer.cs" />
     <Compile Include="Operations\Add.cs" />

@@ -22,14 +22,12 @@ namespace CSLabs
             get
             {
                 Console.Write("> ");
-                decimal input = 0;
 
-                while (!decimal.TryParse(Console.ReadLine(), out input))
+                while (!decimal.TryParse(Console.ReadLine(), out tempValue))
                 {
                     Utils.CleanPreviousLine(2);
                 }
-                 
-                tempValue = input;
+
                 return tempValue;
             }
             set => tempValue = value;

@@ -1,16 +1,21 @@
-﻿using CSLabs.Operations;
+﻿using CSLabs;
+using CSLabs.Operations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CSLabs
+namespace ClassLib
 {
-    class Processing
+    public class GenericProcessing
     {
-        private List<IOperation> operations;
+        protected List<IOperation> operations;
         private IOperation currentOperation;
         private MathBuffer mathBuffer;
+        private OperationsParser parser;
 
-        public Processing()
+        public GenericProcessing()
         {
             currentOperation = new SaveNumber();
 
@@ -25,6 +30,7 @@ namespace CSLabs
             };
 
             mathBuffer = new MathBuffer();
+            parser = new OperationsParser();
         }
 
         public void Start()
@@ -45,31 +51,9 @@ namespace CSLabs
 
                 if (!currentOperation.OperatorChar.IsOneOf('q'))
                 {
-                    GetOperation();
+                    currentOperation = parser.Read(operations);
                 }
             } while (!exit);
-        }
-
-        private void GetOperation()
-        {
-            bool correctKey = false;
-
-            Console.Write("@: ");
-
-            do
-            {
-                ConsoleKeyInfo input = Console.ReadKey(true);
-
-                var oper = operations.Find(x => x.OperatorChar == input.KeyChar);
-
-                if (oper != null)
-                {
-                    Console.WriteLine(input.KeyChar);
-                    correctKey = true;
-
-                    currentOperation = oper;
-                }
-            } while (!correctKey);
         }
     }
 }

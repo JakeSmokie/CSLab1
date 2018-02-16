@@ -47,7 +47,7 @@
     <Compile Include="Operations\Add.cs" />
     <Compile Include="Operations\Div.cs" />
     <Compile Include="Operations\Exit.cs" />
-    <Compile Include="Operations\IOperation.cs" />
+    <Compile Include="IOperation.cs" />
     <Compile Include="Operations\Jump.cs" />
     <Compile Include="Operations\Mul.cs" />
     <Compile Include="Operations\SaveInput.cs" />

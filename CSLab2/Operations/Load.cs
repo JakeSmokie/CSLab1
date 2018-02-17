@@ -3,7 +3,7 @@
     class Load : IOperation
     {
         public char OperatorChar { get => 'l'; }
-        public bool Run(MathBuffer mathBuffer)
+        public bool Run(params object[] args)
         {
             return true;
         }

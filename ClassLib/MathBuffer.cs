@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CSLabs
 {
@@ -9,6 +10,8 @@ namespace CSLabs
         private List<decimal> valuesBuffer;
         private decimal accValue;
         private decimal tempValue;
+
+        public decimal lastTempValue;
 
         public MathBuffer()
         {
@@ -23,16 +26,18 @@ namespace CSLabs
             {
                 Console.Write("> ");
 
-                while (!decimal.TryParse(Console.ReadLine(), out tempValue))
+                while (!decimal.TryParse(Console.ReadLine(),  out tempValue))
                 {
                     Utils.CleanPreviousLine(2);
                 }
 
+                lastTempValue = tempValue;
                 return tempValue;
             }
             set => tempValue = value;
         }
-        
+
+
         public decimal AccValue
         {
             get => accValue;

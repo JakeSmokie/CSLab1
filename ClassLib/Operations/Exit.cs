@@ -5,9 +5,9 @@ namespace CSLabs.Operations
     public class Exit : IOperation
     {
         public char OperatorChar { get => 'q'; }
-        public bool Run(MathBuffer mathBuffer)
+        public bool Run(params object[] args)
         {
-            Console.Beep(880, 1000);
+            Console.Beep(440, 1000);
             return false;
         }
     }

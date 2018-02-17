@@ -5,8 +5,10 @@ namespace CSLabs.Operations
     public class Jump : IOperation
     {
         public char OperatorChar { get => '#'; }
-        public bool Run(MathBuffer mathBuffer)
+        public bool Run(params object[] args)
         {
+            var mathBuffer = (MathBuffer)args[0];
+
             int input = 0;
             bool success = false;
 
@@ -16,6 +18,7 @@ namespace CSLabs.Operations
                 success = int.TryParse(Console.ReadLine(), out input);
             }
 
+            mathBuffer.lastTempValue = input;
             mathBuffer.AccValue = mathBuffer.Buffer[input - 1];
             return true;
         }

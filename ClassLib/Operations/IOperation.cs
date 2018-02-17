@@ -4,6 +4,6 @@
     {
         char OperatorChar { get; }
 
-        bool Run(MathBuffer mathBuffer);
+        bool Run(params object[] args);
     }
 }

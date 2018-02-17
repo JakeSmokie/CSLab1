@@ -2,15 +2,18 @@
 using CSLabs.Operations;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Globalization;
 
 namespace ClassLib
 {
     public class GenericProcessing
     {
         protected List<IOperation> operations;
-        private IOperation currentOperation;
-        private MathBuffer mathBuffer;
-        private OperationsParser parser;
+
+        protected MathBuffer mathBuffer;
+        protected IOperation currentOperation;
+        protected OperationsParser parser;
 
         public GenericProcessing()
         {
@@ -40,10 +43,15 @@ namespace ClassLib
                 "    ‘#’ followed with number of evaluation step\n" +
                 "    ‘q’ to exit\n");
 
+            Loop();
+        }
+
+        public virtual void Loop()
+        {
             while (currentOperation.Run(mathBuffer))
             {
                 currentOperation = parser.Read(operations);
-            } 
+            }
         }
     }
 }

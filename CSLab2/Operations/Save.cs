@@ -10,9 +10,6 @@ namespace CSLabs.Operations
         public bool Run(params object[] args)
         {
             var buffer = (List<string>) args[1];
-            buffer.ForEach(x => Console.WriteLine(x));
-
-            return true;
 
             string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\WolframFiles\";
             Directory.CreateDirectory(path);
@@ -26,13 +23,13 @@ namespace CSLabs.Operations
             {
                 Utils.CleanPreviousLine(msg.Length);
                 name = Console.ReadLine();
-            } while (string.IsNullOrWhiteSpace(name) || name.Contains(@"\"));
+            } while (string.IsNullOrWhiteSpace(name));
 
             path += name + ".txt";
 
             using (var file = new StreamWriter(path, false))
             {
-
+                buffer.ForEach(expression => file.WriteLine(expression));
             }
 
             return true;

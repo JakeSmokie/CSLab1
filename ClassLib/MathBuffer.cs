@@ -39,7 +39,6 @@ namespace CSLabs
                 lastTempValue = tempValue;
                 return tempValue;
             }
-            set => tempValue = value;
         }
 
 

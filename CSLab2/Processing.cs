@@ -1,5 +1,6 @@
 ﻿using ClassLib;
 using CSLabs.Operations;
+using System;
 using System.Collections.Generic;
 
 namespace CSLabs
@@ -18,6 +19,8 @@ namespace CSLabs
 
         public override void Loop()
         {
+            Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
+
             while (currentOperation.Run(mathBuffer, operationsBuffer))
             {
                 UpdateOperationsBuffer();

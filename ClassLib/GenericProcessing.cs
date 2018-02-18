@@ -41,7 +41,7 @@ namespace ClassLib
                 "  when first symbol on line is ‘@’ – enter operation\n" +
                 "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
                 "    ‘#’ followed with number of evaluation step\n" +
-                "    ‘q’ to exit\n");
+                "    ‘q’ to exit");
 
             Loop();
         }

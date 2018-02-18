@@ -2,8 +2,6 @@
 using CSLabs.Operations;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Globalization;
 
 namespace ClassLib
 {
@@ -35,6 +33,8 @@ namespace ClassLib
 
         public void Start()
         {
+            MyCultureInfo.Apply();
+
             Console.WriteLine(
                 "Usage:\n" +
                 "  when first symbol on line is ‘>’ – enter operand(number)\n" +

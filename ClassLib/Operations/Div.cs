@@ -8,23 +8,16 @@ namespace CSLabs.Operations
         public bool Run(params object[] args)
         {
             var mathBuffer = (MathBuffer)args[0];
-            bool exception;
+            double input = mathBuffer.TempValue;
 
-            do
+            if (input == 0)
             {
-                exception = false;
-                decimal input = mathBuffer.TempValue;
-
-                try
-                {
-                    mathBuffer.AccValue /= input;
-                }
-                catch (DivideByZeroException e)
-                {
-                    Console.WriteLine(e.Message);
-                    exception = true;
-                }
-            } while (exception);
+                Console.WriteLine(new DivideByZeroException().Message);
+            }
+            else
+            {
+                mathBuffer.AccValue /= input;
+            }
 
             return true;
         }

@@ -1,32 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace CSLabs
 {
 
     public class MathBuffer
     {
-        private List<decimal> valuesBuffer;
-        private decimal accValue;
-        private decimal tempValue;
+        private double accValue;
+        private double tempValue;
 
-        public decimal lastTempValue;
+        public double lastTempValue;
+        public List<double> values;
 
         public MathBuffer()
         {
-            valuesBuffer = new List<decimal>();
+            values = new List<double>();
             accValue = 0;
             tempValue = 0;
         }
 
-        public decimal TempValue
+        public MathBuffer(MathBuffer old)
+        {
+            accValue = old.values[old.values.Count - 1];
+            values = old.values;
+        }
+
+        public double TempValue
         {
             get
             {
                 Console.Write("> ");
 
-                while (!decimal.TryParse(Console.ReadLine(),  out tempValue))
+                while (!double.TryParse(Console.ReadLine(),  out tempValue))
                 {
                     Utils.CleanPreviousLine(2);
                 }
@@ -38,18 +43,21 @@ namespace CSLabs
         }
 
 
-        public decimal AccValue
+        public double AccValue
         {
             get => accValue;
             set
             {
                 accValue = value;
-                valuesBuffer.Add(value);
+                values.Add(value);
 
-                Console.WriteLine($"[#{ valuesBuffer.Count }] = { value }");
+                Console.WriteLine($"[#{ values.Count }] = { value }");
             }
         }
 
-        public List<decimal> Buffer { get => valuesBuffer; }
+        public double AccValueNoAdd
+        {
+            set => accValue = value;
+        }
     }
 }

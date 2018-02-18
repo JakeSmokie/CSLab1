@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Globalization;
 
 namespace CSLabs
 {
+    public delegate bool BoolAction();
+
     public static class Utils
     {
+
         public static void CleanPreviousLine(int offset)
         {
             Console.CursorTop -= 1;

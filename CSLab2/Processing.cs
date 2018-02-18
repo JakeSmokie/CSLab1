@@ -1,6 +1,5 @@
 ﻿using ClassLib;
 using CSLabs.Operations;
-using System;
 using System.Collections.Generic;
 
 namespace CSLabs
@@ -8,6 +7,7 @@ namespace CSLabs
     class Processing : GenericProcessing
     {
         private List<string> operationsBuffer;
+
         public Processing() : base()
         {
             operations.Add(new Load());
@@ -37,13 +37,13 @@ namespace CSLabs
             switch (currentOperation.OperatorChar)
             {
                 case '\0':
-                    expression = mathBuffer.Buffer[0].ToWolfString();
+                    expression = mathBuffer.values[0].ToWolfString();
                     break;  
                 case '#':
-                    expression = "%" + mathBuffer.lastTempValue;
+                    expression = $"Out[{ mathBuffer.lastTempValue }]";
                     break;
                 default:
-                    expression = $"% { currentOperation.OperatorChar } { mathBuffer.lastTempValue.ToWolfString() } ";
+                    expression = $"Out[-1] { currentOperation.OperatorChar } { mathBuffer.lastTempValue.ToWolfString() } ";
                     break;
             }
 

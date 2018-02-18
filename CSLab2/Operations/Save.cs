@@ -10,22 +10,7 @@ namespace CSLabs.Operations
         public bool Run(params object[] args)
         {
             var buffer = (List<string>) args[1];
-
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\WolframFiles\";
-            Directory.CreateDirectory(path);
-
-            string msg = "Enter name of file: ";
-            Console.WriteLine(msg);
-
-            string name;
-
-            do
-            {
-                Utils.CleanPreviousLine(msg.Length);
-                name = Console.ReadLine();
-            } while (string.IsNullOrWhiteSpace(name));
-
-            path += name + ".txt";
+            string path = new PathReader().Read(overwriteCheck);
 
             using (var file = new StreamWriter(path, false))
             {
@@ -34,5 +19,23 @@ namespace CSLabs.Operations
 
             return true;
         }
+
+        private Predicate<string> overwriteCheck = delegate (string s)
+        {
+            if (!File.Exists(s))
+            {
+                return true;
+            }
+
+            Console.WriteLine($"Overwrite file {s} ? Press Y to confirm, any key to deny");
+            
+            if (Console.ReadKey(true).Key == ConsoleKey.Y)
+            {
+                return true;
+            }
+
+            Utils.CleanPreviousLine(0);
+            return false;
+        };
     }
 }

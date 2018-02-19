@@ -11,7 +11,7 @@ namespace CSLabs.Operations
             var mathBuffer = (MathBuffer)args[0];
 
             Console.CursorTop -= 1;
-            int input = new ValuesReader<int>().Read($"@: {OperatorChar}", x => (x > 0 && x <= mathBuffer.values.Count));
+            int input = new IntReader().Read($"@: {OperatorChar}", x => (x > 0 && x <= mathBuffer.values.Count));
 
             mathBuffer.TempValue = input;
             mathBuffer.AccValue = mathBuffer.values[input - 1];

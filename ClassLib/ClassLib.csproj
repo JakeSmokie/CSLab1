@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,7 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -40,9 +38,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Readers\DoubleReader.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GenericProcessing.cs" />
-    <Compile Include="Readers\ValuesReader.cs" />
+    <Compile Include="Readers\IntReader.cs" />
     <Compile Include="MyCultureInfo.cs" />
     <Compile Include="Readers\OperationsReader.cs" />
     <Compile Include="Operations\IOperation.cs" />

@@ -11,8 +11,11 @@ namespace CSLabs
 
         public Processing() : base()
         {
-            operations.Add(new Load());
-            operations.Add(new Save());
+            operations.AddRange(new List<IOperation>
+            {
+                new Load(),
+                new Save()
+            });
 
             operationsBuffer = new List<string>();
         }

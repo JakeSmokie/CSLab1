@@ -7,7 +7,7 @@ namespace CSLabs
 {
     class Processing : GenericProcessing
     {
-        private List<string> operationsBuffer;
+        private List<string> operationsBuffer = new List<string>();
 
         public Processing() : base()
         {
@@ -16,8 +16,6 @@ namespace CSLabs
                 new Load(),
                 new Save()
             });
-
-            operationsBuffer = new List<string>();
         }
 
         public override void Loop()

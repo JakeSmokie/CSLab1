@@ -9,25 +9,23 @@ namespace CSLabs.Operations
         public char OperatorChar { get => 's'; }
         public bool Run(params object[] args)
         {
-            var buffer = (List<string>) args[1];
-            string path = new PathReader().Read(overwriteCheck);
-
-            using (var file = new StreamWriter(path, false))
+            using (var file = new StreamWriter(new PathReader().Read(">> ", overwriteCheck), false))
             {
-                buffer.ForEach(expression => file.WriteLine(expression));
+                // Operations buffer
+                ((List<string>)args[1]).ForEach(expression => file.WriteLine(expression));
             }
 
             return true;
         }
 
-        private Predicate<string> overwriteCheck = delegate (string s)
+        private Predicate<string> overwriteCheck = delegate (string path)
         {
-            if (!File.Exists(s))
+            if (!File.Exists(path))
             {
                 return true;
             }
 
-            Console.WriteLine($"Overwrite file {s} ? Press Y to confirm, any key to deny");
+            Console.WriteLine($"Overwrite file {path} ? Press Y to confirm, any key to deny");
             
             if (Console.ReadKey(true).Key == ConsoleKey.Y)
             {

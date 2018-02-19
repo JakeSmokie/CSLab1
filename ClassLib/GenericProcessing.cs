@@ -7,29 +7,19 @@ namespace ClassLib
 {
     public class GenericProcessing
     {
-        protected List<IOperation> operations;
-
-        protected MathBuffer mathBuffer;
-        protected IOperation currentOperation;
-        protected OperationsParser parser;
-
-        public GenericProcessing()
+        protected List<IOperation> operations = new List<IOperation>
         {
-            currentOperation = new SaveNumber();
+            new Add(),
+            new Sub(),
+            new Div(),
+            new Mul(),
+            new Jump(),
+            new Exit()
+        };
 
-            operations = new List<IOperation>
-            {
-                new Add(),
-                new Sub(),
-                new Div(),
-                new Mul(),
-                new Jump(),
-                new Exit()
-            };
-
-            mathBuffer = new MathBuffer();
-            parser = new OperationsParser();
-        }
+        protected MathBuffer mathBuffer = new MathBuffer();
+        protected IOperation currentOperation = new SaveNumber();
+        protected OperationsReader parser = new OperationsReader();
 
         public void Start()
         {

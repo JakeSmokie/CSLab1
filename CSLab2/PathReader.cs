@@ -7,14 +7,14 @@ namespace CSLabs
     {
         private string FolderPath => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\WolframFiles\";
 
-        public string Read(Predicate<string> pathCorrectnessPredicate = null)
+        public string Read(string msg, Predicate<string> pathCorrectnessPredicate = null)
         {
             Directory.CreateDirectory(FolderPath);
             PrintExistFiles();
 
             Console.WriteLine(
                 "Enter name of file. \n" +
-                "> ");
+                msg);
 
             string name, finalName;
 
@@ -22,7 +22,7 @@ namespace CSLabs
             {
                 do
                 {
-                    Utils.CleanPreviousLine(2);
+                    Utils.CleanPreviousLine(msg.Length);
                     name = Console.ReadLine();
                 } while (string.IsNullOrWhiteSpace(name));
 

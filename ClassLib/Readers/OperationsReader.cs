@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ClassLib
 {
-    public class OperationsParser
+    public class OperationsReader
     {
         public IOperation Read(List<IOperation> list)
         {

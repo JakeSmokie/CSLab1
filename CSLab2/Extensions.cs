@@ -6,7 +6,7 @@ namespace CSLabs
     {
         public static string ToWolfString(this double val)
         {
-            return $"{ val }{ (val - Math.Truncate(val) > 0 ? "" : ".0") }";
+            return $"{ val }{ (val - Math.Truncate(val) > 0 || val.ToString().Contains("E") ? "" : ".0") }";
         }
     }
 }

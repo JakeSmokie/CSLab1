@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLib;
+using System;
 using System.Collections.Generic;
 
 namespace CSLabs
@@ -6,35 +7,17 @@ namespace CSLabs
 
     public class MathBuffer
     {
-        public List<double> values;
+        public List<double> values = new List<double>();
         public double AccValue { get; set; }
 
-        public MathBuffer()
-        {
-            values = new List<double>();
-            AccValue = 0;
-        }
-
-        public MathBuffer(MathBuffer old)
-        {
-            AccValue = old.values[old.values.Count - 1];
-            values = old.values;
-        }
+        public MathBuffer() => AccValue = 0;
 
         public double TempValue { get; set; }
 
         public double ReadTempValue()
         {
-            double temp = double.NaN;
-            Console.Write("> ");
-
-            while (!double.TryParse(Console.ReadLine(), out temp))
-            {
-                Utils.CleanPreviousLine(2);
-            }
-
-            TempValue = temp;
-            return temp;
+            TempValue = new DoubleReader().Read("> ");
+            return TempValue;
         }
 
         public void SaveAccValue()

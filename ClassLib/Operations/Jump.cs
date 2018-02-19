@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLib;
+using System;
 
 namespace CSLabs.Operations
 {
@@ -9,14 +10,8 @@ namespace CSLabs.Operations
         {
             var mathBuffer = (MathBuffer)args[0];
 
-            int input = 0;
-            bool success = false;
-
-            while (!success || input <= 0 || input > mathBuffer.values.Count)
-            {
-                Utils.CleanPreviousLine(4);
-                success = int.TryParse(Console.ReadLine(), out input);
-            }
+            Console.CursorTop -= 1;
+            int input = new IntReader().Read($"@: {OperatorChar}", x => (x > 0 && x <= mathBuffer.values.Count));
 
             mathBuffer.TempValue = input;
             mathBuffer.AccValue = mathBuffer.values[input - 1];

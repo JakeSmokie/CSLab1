@@ -6,57 +6,41 @@ namespace CSLabs
 
     public class MathBuffer
     {
-        private double accValue;
-        private double tempValue;
-
-        public double lastTempValue;
         public List<double> values;
+        public double AccValue { get; set; }
 
         public MathBuffer()
         {
             values = new List<double>();
-            accValue = 0;
-            tempValue = 0;
+            AccValue = 0;
         }
 
         public MathBuffer(MathBuffer old)
         {
-            accValue = old.values[old.values.Count - 1];
+            AccValue = old.values[old.values.Count - 1];
             values = old.values;
         }
 
-        public double TempValue
+        public double TempValue { get; set; }
+
+        public double ReadTempValue()
         {
-            get
+            double temp = double.NaN;
+            Console.Write("> ");
+
+            while (!double.TryParse(Console.ReadLine(), out temp))
             {
-                Console.Write("> ");
-
-                while (!double.TryParse(Console.ReadLine(),  out tempValue))
-                {
-                    Utils.CleanPreviousLine(2);
-                }
-
-                lastTempValue = tempValue;
-                return tempValue;
+                Utils.CleanPreviousLine(2);
             }
+
+            TempValue = temp;
+            return temp;
         }
 
-
-        public double AccValue
+        public void SaveAccValue()
         {
-            get => accValue;
-            set
-            {
-                accValue = value;
-                values.Add(value);
-
-                Console.WriteLine($"[#{ values.Count }] = { value }");
-            }
-        }
-
-        public double AccValueNoAdd
-        {
-            set => accValue = value;
+            values.Add(AccValue);
+            Console.WriteLine($"[#{ values.Count }] = { AccValue }");
         }
     }
 }

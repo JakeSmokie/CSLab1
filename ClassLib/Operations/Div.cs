@@ -8,7 +8,7 @@ namespace CSLabs.Operations
         public bool Run(params object[] args)
         {
             var mathBuffer = (MathBuffer)args[0];
-            double input = mathBuffer.TempValue;
+            double input = mathBuffer.ReadTempValue();
 
             if (input == 0)
             {
@@ -17,6 +17,7 @@ namespace CSLabs.Operations
             else
             {
                 mathBuffer.AccValue /= input;
+                mathBuffer.SaveAccValue();
             }
 
             return true;

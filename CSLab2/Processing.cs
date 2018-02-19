@@ -43,10 +43,10 @@ namespace CSLabs
                     expression = mathBuffer.values[0].ToWolfString();
                     break;  
                 case '#':
-                    expression = $"Out[{ mathBuffer.lastTempValue }]";
+                    expression = $"Out[{ mathBuffer.TempValue }]";
                     break;
                 default:
-                    expression = $"Out[-1] { currentOperation.OperatorChar } { mathBuffer.lastTempValue.ToWolfString() } ";
+                    expression = $"Out[-1] { currentOperation.OperatorChar } { mathBuffer.TempValue.ToWolfString() } ";
                     break;
             }
 

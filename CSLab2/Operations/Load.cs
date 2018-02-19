@@ -21,16 +21,16 @@ namespace CSLabs.Operations
             var file = new StreamReader(new PathReader().Read(s => File.Exists(s)));
 
             var mathBuffer = (MathBuffer)args[0];
-            var newMathBuffer = new MathBuffer();
+            var newMBuffer = new MathBuffer();
 
             var operationsBuffer = (List<string>)args[1];
-            var newOperationsBuffer = new List<string>();
+            var newOperBuffer = new List<string>();
 
             string expression;
 
             while ((expression = file.ReadLine()) != null)
             {
-                newOperationsBuffer.Add(expression);
+                newOperBuffer.Add(expression);
 
                 foreach (var pair in replaceDictionary)
                 {
@@ -50,10 +50,10 @@ namespace CSLabs.Operations
 
                     if (index < 0)
                     {
-                        index = newMathBuffer.values.Count + index + 1;
+                        index = newMBuffer.values.Count + index + 1;
                     }
 
-                    expression = expression.Replace(old, "" + newMathBuffer.values[index - 1]);
+                    expression = expression.Replace(old, "" + newMBuffer.values[index - 1]);
                 }
 
                 double result = double.NaN;
@@ -61,24 +61,24 @@ namespace CSLabs.Operations
                 try
                 {
                     result = (double)System.Linq.Dynamic.DynamicExpression.ParseLambda(new ParameterExpression[0], typeof(double), expression).Compile()?.DynamicInvoke();
-                    newMathBuffer.values.Add(result);
+                    newMBuffer.values.Add(result);
                 }
                 catch (System.Linq.Dynamic.ParseException e)
                 {
                     Console.WriteLine(e.Message);
                 }
 
-                Console.WriteLine($"[#{ newMathBuffer.values.Count }] { newOperationsBuffer[newOperationsBuffer.Count - 1] } = " +
+                Console.WriteLine($"[#{ newMBuffer.values.Count }] { newOperBuffer[newOperBuffer.Count - 1] } = " +
                     (outFuncMatches.Count > 0 ? $"{ expression } = " : "") + result);
             }
 
             file.Dispose();
 
-            mathBuffer.values = newMathBuffer.values;
-            mathBuffer.AccValueNoAdd = newMathBuffer.values[newMathBuffer.values.Count - 1];
+            mathBuffer.values = newMBuffer.values;
+            mathBuffer.AccValue = newMBuffer.values[newMBuffer.values.Count - 1];
 
             operationsBuffer.Clear();
-            operationsBuffer.AddRange(newOperationsBuffer);
+            operationsBuffer.AddRange(newOperBuffer);
 
             return true;
         }

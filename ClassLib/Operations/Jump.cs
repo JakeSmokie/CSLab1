@@ -18,8 +18,10 @@ namespace CSLabs.Operations
                 success = int.TryParse(Console.ReadLine(), out input);
             }
 
-            mathBuffer.lastTempValue = input;
+            mathBuffer.TempValue = input;
             mathBuffer.AccValue = mathBuffer.values[input - 1];
+            mathBuffer.SaveAccValue();
+
             return true;
         }
     }

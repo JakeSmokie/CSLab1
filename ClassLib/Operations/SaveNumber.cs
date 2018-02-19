@@ -7,7 +7,9 @@
         {
             var mathBuffer = (MathBuffer)args[0];
 
-            mathBuffer.AccValue = mathBuffer.TempValue;
+            mathBuffer.AccValue = mathBuffer.ReadTempValue();
+            mathBuffer.SaveAccValue();
+
             return true;
         }
     }

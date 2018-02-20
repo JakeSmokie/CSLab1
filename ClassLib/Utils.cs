@@ -53,25 +53,18 @@ namespace CSLabs
 
         public static IOperation ReadOperation(List<IOperation> list)
         {
-            bool correctKey = false;
             IOperation result = null;
+            char key;
 
             Console.Write("@: ");
 
             do
             {
-                ConsoleKeyInfo input = Console.ReadKey(true);
-                var oper = list.Find(x => x.OperatorChar == input.KeyChar);
+                key = Console.ReadKey(true).KeyChar;
+            }
+            while ((result = list.Find(x => x.OperatorChar == key)) == null);
 
-                if (oper != null)
-                {
-                    Console.WriteLine(input.KeyChar);
-                    correctKey = true;
-
-                    result = oper;
-                }
-            } while (!correctKey);
-
+            Console.WriteLine(result.OperatorChar);
             return result;
         }
     }

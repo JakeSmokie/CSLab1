@@ -38,12 +38,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Readers\DoubleReader.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GenericProcessing.cs" />
-    <Compile Include="Readers\IntReader.cs" />
     <Compile Include="MyCultureInfo.cs" />
-    <Compile Include="Readers\OperationsReader.cs" />
     <Compile Include="Operations\IOperation.cs" />
     <Compile Include="MathBuffer.cs" />
     <Compile Include="Operations\Add.cs" />

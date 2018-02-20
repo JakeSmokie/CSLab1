@@ -22,7 +22,7 @@ namespace CSLabs
             {
                 do
                 {
-                    Utils.CleanPreviousLine(msg.Length);
+                    ConsoleUtils.CleanPreviousLine(msg.Length);
                     name = Console.ReadLine();
                 } while (string.IsNullOrWhiteSpace(name));
 

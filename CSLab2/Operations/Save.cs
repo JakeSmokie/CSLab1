@@ -32,7 +32,7 @@ namespace CSLabs.Operations
                 return true;
             }
 
-            Utils.CleanPreviousLine(0);
+            ConsoleUtils.CleanPreviousLine(0);
             return false;
         };
     }

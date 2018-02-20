@@ -16,7 +16,7 @@ namespace CSLabs
 
         public double ReadTempValue()
         {
-            TempValue = new DoubleReader().Read("> ");
+            TempValue = ConsoleUtils.ReadDouble();
             return TempValue;
         }
 

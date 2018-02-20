@@ -19,7 +19,6 @@ namespace ClassLib
 
         protected MathBuffer mathBuffer = new MathBuffer();
         protected IOperation currentOperation = new SaveNumber();
-        protected OperationsReader parser = new OperationsReader();
 
         public void Start()
         {
@@ -40,7 +39,7 @@ namespace ClassLib
         {
             while (currentOperation.Run(mathBuffer))
             {
-                currentOperation = parser.Read(operations);
+                currentOperation = ConsoleUtils.ReadOperation(operations);
             }
         }
     }

@@ -51,7 +51,7 @@ namespace CSLabs
             return temp;
         }
 
-        public static IOperation Read(List<IOperation> list)
+        public static IOperation ReadOperation(List<IOperation> list)
         {
             bool correctKey = false;
             IOperation result = null;

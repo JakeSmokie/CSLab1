@@ -25,7 +25,7 @@ namespace CSLabs
             while (currentOperation.Run(mathBuffer, operationsBuffer))
             {
                 UpdateOperationsBuffer();
-                currentOperation = parser.Read(operations);
+                currentOperation = ConsoleUtils.ReadOperation(operations);
             }
         }
 

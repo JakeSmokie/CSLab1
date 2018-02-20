@@ -1,12 +1,14 @@
 ﻿using CSLabs;
 using CSLabs.Operations;
-using System;
 using System.Collections.Generic;
 
 namespace ClassLib
 {
     public class GenericProcessing
     {
+        protected CalcIn inStream = new CalcIn();
+        protected CalcOut outStream = new CalcOut();
+
         protected List<IOperation> operations = new List<IOperation>
         {
             new Add(),
@@ -17,30 +19,28 @@ namespace ClassLib
             new Exit()
         };
 
-        protected MathBuffer mathBuffer = new MathBuffer();
+        protected MathBuffer mathBuffer;
         protected IOperation currentOperation = new SaveNumber();
 
         public void Start()
         {
+            mathBuffer = new MathBuffer(inStream, outStream);
+
             MyCultureInfo.Apply();
+            outStream.SendGreeting();
 
-            Console.WriteLine(
-                "Usage:\n" +
-                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
-                "  when first symbol on line is ‘@’ – enter operation\n" +
-                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-                "    ‘#’ followed with number of evaluation step\n" +
-                "    ‘q’ to exit");
+            PostStart();
 
-            Loop();
-        }
-
-        public virtual void Loop()
-        {
-            while (currentOperation.Run(mathBuffer))
+            while (RunOperation())
             {
-                currentOperation = ConsoleUtils.ReadOperation(operations);
+                ReadOperation();
             }
         }
+
+        protected virtual void PostStart() { }
+
+        protected virtual bool RunOperation() => currentOperation.Run(mathBuffer, inStream, outStream);
+
+        protected virtual void ReadOperation() => currentOperation = inStream.ReadOperation(operations);
     }
 }

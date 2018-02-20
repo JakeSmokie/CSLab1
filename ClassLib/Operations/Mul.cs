@@ -2,7 +2,7 @@
 {
     public class Mul : IOperation
     {
-        public char OperatorChar { get => '*'; }
+        public char OperatorChar => '*';
         public bool Run(params object[] args)
         {
             var mathBuffer = (MathBuffer)args[0];

@@ -4,8 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var processing = new Processing();
-            processing.Start();
+            new Processing().Start();
         }
     }
 }

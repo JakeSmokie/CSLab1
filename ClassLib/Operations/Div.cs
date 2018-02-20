@@ -1,18 +1,20 @@
-﻿using System;
+﻿using ClassLib;
 
 namespace CSLabs.Operations
 {
     public class Div : IOperation
     {
-        public char OperatorChar { get => '/'; }
+        public char OperatorChar => '/';
         public bool Run(params object[] args)
         {
             var mathBuffer = (MathBuffer)args[0];
+            var outStream = (CalcOut)args[2];
+
             double input = mathBuffer.ReadTempValue();
 
             if (input == 0)
             {
-                Console.WriteLine(new DivideByZeroException().Message);
+                outStream.SendDivideException();
             }
             else
             {

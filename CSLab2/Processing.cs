@@ -18,15 +18,17 @@ namespace CSLabs
             });
         }
 
-        public override void Loop()
+        protected override void PostStart()
         {
             Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
+        }
 
-            while (currentOperation.Run(mathBuffer, operationsBuffer))
-            {
-                UpdateOperationsBuffer();
-                currentOperation = ConsoleUtils.ReadOperation(operations);
-            }
+        protected override bool RunOperation() => currentOperation.Run(mathBuffer, inStream, outStream, operationsBuffer);
+
+        protected override void ReadOperation()
+        {
+            UpdateOperationsBuffer();
+            base.ReadOperation();
         }
 
         private void UpdateOperationsBuffer()

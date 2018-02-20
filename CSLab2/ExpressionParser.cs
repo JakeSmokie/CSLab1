@@ -14,7 +14,7 @@ namespace CSLabs
             ["Sqrt"] = "Math.Sqrt"
         };
 
-        public double Parse(ref string expression, MathBuffer mathBuffer)
+        public double Parse(ref string expression, List<double> valBuffer)
         {
             foreach (var pair in replaceDictionary)
             {
@@ -34,10 +34,10 @@ namespace CSLabs
 
                 if (index < 0)
                 {
-                    index = mathBuffer.values.Count + index + 1;
+                    index = valBuffer.Count + index + 1;
                 }
 
-                expression = expression.Replace(old, "" + mathBuffer.values[index - 1]);
+                expression = expression.Replace(old, "" + valBuffer[index - 1]);
             }
 
             double result = double.NaN;
@@ -45,7 +45,7 @@ namespace CSLabs
             try
             {
                 result = (double)System.Linq.Dynamic.DynamicExpression.ParseLambda(new ParameterExpression[0], typeof(double), expression).Compile()?.DynamicInvoke();
-                mathBuffer.values.Add(result);
+                valBuffer.Add(result);
             }
             catch (System.Linq.Dynamic.ParseException e)
             {

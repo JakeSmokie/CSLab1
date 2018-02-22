@@ -10,17 +10,15 @@ namespace CSLabs.Operations
             var mathBuffer = (MathBuffer)args[0];
             var outStream = (CalcOut)args[2];
 
-            double input = mathBuffer.ReadTempValue();
+            double input;
 
-            if (input == 0)
+            do
             {
-                outStream.SendDivideException();
-            }
-            else
-            {
-                mathBuffer.AccValue /= input;
-                mathBuffer.SaveAccValue();
-            }
+                input = mathBuffer.ReadTempValue();
+            } while (input == 0);
+
+            mathBuffer.AccValue /= input;
+            mathBuffer.SaveAccValue();
 
             return true;
         }

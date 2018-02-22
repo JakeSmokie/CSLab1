@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace ClassLib
 {
-    static class MyCultureInfo
+    internal static class MyCultureInfo
     {
         public static void Apply()
         {

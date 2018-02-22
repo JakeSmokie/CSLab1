@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CSLabs.Operations
 {
-    class Load : IOperation
+    internal class Load : IOperation
     {
         public char OperatorChar => 'l';
         public bool Run(params object[] args)

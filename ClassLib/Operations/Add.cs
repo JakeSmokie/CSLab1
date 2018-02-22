@@ -1,6 +1,6 @@
 ﻿namespace CSLabs.Operations
 {
-    public class Add : IOperation
+    internal class Add : IOperation
     {
         public char OperatorChar => '+';
         public bool Run(params object[] args)

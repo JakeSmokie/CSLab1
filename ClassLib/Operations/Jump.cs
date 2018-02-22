@@ -3,7 +3,7 @@ using System;
 
 namespace CSLabs.Operations
 {
-    public class Jump : IOperation
+    internal class Jump : IOperation
     {
         public char OperatorChar => '#';
         public bool Run(params object[] args)

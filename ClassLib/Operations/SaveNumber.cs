@@ -1,6 +1,6 @@
 ﻿namespace CSLabs.Operations
 {
-    public class SaveNumber : IOperation
+    internal class SaveNumber : IOperation
     {
         public char OperatorChar => '\0';
         public bool Run(params object[] args)

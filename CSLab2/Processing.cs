@@ -16,19 +16,11 @@ namespace CSLabs
                 new Load(),
                 new Save()
             });
-        }
 
-        protected override void PostStart()
-        {
-            Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
-        }
+            OnProcessingStart += () => Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
 
-        protected override bool RunOperation() => currentOperation.Run(mathBuffer, inStream, outStream, operationsBuffer);
-
-        protected override void ReadOperation()
-        {
-            UpdateOperationsBuffer();
-            base.ReadOperation();
+            OnOperationRun = () => currentOperation.Run(mathBuffer, inStream, outStream, operationsBuffer);
+            OnOperationRead = UpdateOperationsBuffer + OnOperationRead;
         }
 
         private void UpdateOperationsBuffer()
@@ -37,7 +29,7 @@ namespace CSLabs
             {
                 return;
             }
-
+            
             string expression;
 
             switch (currentOperation.OperatorChar)

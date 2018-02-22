@@ -1,11 +1,10 @@
 ﻿using ClassLib;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace CSLabs.Operations
 {
-    class Save : IOperation
+    internal class Save : IOperation
     {
         public char OperatorChar => 's';
         public bool Run(params object[] args)
@@ -21,23 +20,5 @@ namespace CSLabs.Operations
 
             return true;
         }
-
-        //private Predicate<string> overwriteCheck = delegate (string path)
-        //{
-        //    if (!File.Exists(path))
-        //    {
-        //        return true;
-        //    }
-
-        //    Console.WriteLine($"Overwrite file {path} ? Press Y to confirm, any key to deny");
-            
-        //    if (Console.ReadKey(true).Key == ConsoleKey.Y)
-        //    {
-        //        return true;
-        //    }
-
-        //    ConsoleUtils.CleanPreviousLine(0);
-        //    return false;
-        //};
     }
 }

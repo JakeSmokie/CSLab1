@@ -1,6 +1,6 @@
 ﻿namespace CSLabs.Operations
 {
-    public class Mul : IOperation
+    internal class Mul : IOperation
     {
         public char OperatorChar => '*';
         public bool Run(params object[] args)

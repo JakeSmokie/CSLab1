@@ -1,5 +1,6 @@
 ﻿using CSLabs;
 using CSLabs.Operations;
+using System;
 using System.Collections.Generic;
 
 namespace ClassLib
@@ -22,25 +23,29 @@ namespace ClassLib
         protected MathBuffer mathBuffer;
         protected IOperation currentOperation = new SaveNumber();
 
-        public void Start()
+        protected Action OnProcessingStart;
+
+        protected Action OnOperationRead;
+        protected Func<bool> OnOperationRun;
+
+        public GenericProcessing()
         {
             mathBuffer = new MathBuffer(inStream, outStream);
-
-            MyCultureInfo.Apply();
-            outStream.SendGreeting();
-
-            PostStart();
-
-            while (RunOperation())
-            {
-                ReadOperation();
-            }
+            
+            OnProcessingStart = () => outStream.SendGreeting();
+            OnOperationRun    = () => currentOperation.Run(mathBuffer, inStream, outStream);
+            OnOperationRead   = () => currentOperation = inStream.ReadOperation(operations);
         }
 
-        protected virtual void PostStart() { }
+        public void Start()
+        {
+            MyCultureInfo.Apply();
+            OnProcessingStart?.Invoke();
 
-        protected virtual bool RunOperation() => currentOperation.Run(mathBuffer, inStream, outStream);
-
-        protected virtual void ReadOperation() => currentOperation = inStream.ReadOperation(operations);
+            while (OnOperationRun?.Invoke() ?? false)
+            {
+                OnOperationRead?.Invoke();
+            }
+        }
     }
 }

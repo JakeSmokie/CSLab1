@@ -2,7 +2,7 @@
 
 namespace CSLabs.Operations
 {
-    public class Exit : IOperation
+    internal class Exit : IOperation
     {
         public char OperatorChar => 'q';
         public bool Run(params object[] args)

@@ -2,7 +2,7 @@
 
 namespace CSLabs.Operations
 {
-    public class Div : IOperation
+    internal class Div : IOperation
     {
         public char OperatorChar => '/';
         public bool Run(params object[] args)

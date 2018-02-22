@@ -2,8 +2,6 @@
 
 namespace CSLabs
 {
-    public delegate bool BoolAction();
-
     public static class ConsoleUtils
     {
         public static void CleanPreviousLine(int offset)

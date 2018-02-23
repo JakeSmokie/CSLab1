@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace CSLabs
 {
-    class Processing : GenericProcessing
+    class SecondLabOperationsProcessor : OperationsProcessor
     {
         private List<string> operationsBuffer = new List<string>();
 
-        public Processing() : base()
+        public SecondLabOperationsProcessor() : base()
         {
             operations.AddRange(new List<IOperation>
             {
@@ -19,7 +19,7 @@ namespace CSLabs
 
             OnProcessingStart += () => Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
 
-            OnOperationRun = () => currentOperation.Run(mathBuffer, inStream, outStream, operationsBuffer);
+            OnOperationRun = () => currentOperation.Run(mathBuffer, inOutStream, operationsBuffer);
             OnOperationRead = UpdateOperationsBuffer + OnOperationRead;
         }
 

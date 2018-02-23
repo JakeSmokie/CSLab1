@@ -8,16 +8,16 @@ namespace CSLabs
     {
         private string FolderPath => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\WolframFiles\";
 
-        public string Read(CalcIn inStream, CalcOut outStream, Predicate<string> pathCorrectnessPredicate = null)
+        public string Read(ICalcIO inOutStream, Predicate<string> pathCorrectnessPredicate = null)
         {
             Directory.CreateDirectory(FolderPath);
-            outStream.SendFilesInFolder(FolderPath);
+            inOutStream.SendFilesInFolder(FolderPath);
 
             string finalName;
 
             do
             {
-                finalName = FolderPath + inStream.GetFileName() + ".txt";
+                finalName = FolderPath + inOutStream.GetFileName() + ".txt";
             } while (!(pathCorrectnessPredicate?.Invoke(finalName) ?? true));
 
             return finalName;

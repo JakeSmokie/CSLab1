@@ -8,7 +8,6 @@ namespace CSLabs.Operations
         public bool Run(params object[] args)
         {
             var mathBuffer = (MathBuffer)args[0];
-            var outStream = (CalcOut)args[2];
 
             double input;
 

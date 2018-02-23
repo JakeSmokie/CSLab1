@@ -38,10 +38,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalcIn.cs" />
-    <Compile Include="CalcOut.cs" />
+    <Compile Include="CalcIO\ConsoleCalcIO.cs" />
+    <Compile Include="CalcIO\ICalcIO.cs" />
     <Compile Include="Misc\Extensions.cs" />
-    <Compile Include="GenericProcessing.cs" />
+    <Compile Include="OperationsProcessor.cs" />
     <Compile Include="Misc\MyCultureInfo.cs" />
     <Compile Include="Operations\IOperation.cs" />
     <Compile Include="MathBuffer.cs" />

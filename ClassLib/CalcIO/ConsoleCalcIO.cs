@@ -2,12 +2,39 @@
 using CSLabs.Operations;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ClassLib
 {
-    public class CalcIn
+    public class ConsoleCalcIO : ICalcIO
     {
-        public virtual double ReadDouble(Predicate<double> valueCorrectnessPredicate = null)
+        public void SendMathAcc(string msg) => Console.WriteLine(msg);
+        public void SendGreeting() => Console.WriteLine(
+            "Usage:\n" +
+            "  when first symbol on line is ‘>’ – enter operand(number)\n" +
+            "  when first symbol on line is ‘@’ – enter operation\n" +
+            "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
+            "    ‘#’ followed with number of evaluation step\n" +
+            "    ‘q’ to exit");
+        public void SendDivideException() => Console.WriteLine(new DivideByZeroException().Message);
+
+        public void SendFilesInFolder(string folder)
+        {
+            Console.WriteLine("List of existing files:");
+
+            foreach (string file in Directory.GetFiles(folder, "*.txt"))
+            {
+                Console.WriteLine(" * " + file.Replace(folder, "").Replace(".txt", ""));
+            }
+
+            Console.WriteLine(
+                "Enter name of file. \n" +
+                "<< ");
+        }
+
+        public void SendLoadResult(string msg) => Console.WriteLine(msg);
+
+        public double ReadDouble(Predicate<double> valueCorrectnessPredicate = null)
         {
             double temp;
             Console.WriteLine("> ");
@@ -25,7 +52,7 @@ namespace ClassLib
             return temp;
         }
 
-        public virtual int ReadInt(Predicate<int> valueCorrectnessPredicate = null)
+        public int ReadInt(Predicate<int> valueCorrectnessPredicate = null)
         {
             int temp;
             Console.WriteLine("@: #");
@@ -43,7 +70,7 @@ namespace ClassLib
             return temp;
         }
 
-        public virtual IOperation ReadOperation(List<IOperation> list)
+        public IOperation ReadOperation(List<IOperation> list)
         {
             IOperation result = null;
             char key;
@@ -60,7 +87,7 @@ namespace ClassLib
             return result;
         }
 
-        public virtual string GetFileName()
+        public string GetFileName()
         {
             string name;
 

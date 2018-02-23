@@ -9,10 +9,10 @@ namespace CSLabs.Operations
         public bool Run(params object[] args)
         {
             var mathBuffer = (MathBuffer)args[0];
-            var inStream = (CalcIn)args[1];
+            var inOutStream = (ICalcIO)args[1];
 
             Console.CursorTop -= 1;
-            int input = inStream.ReadInt(x => (x > 0 && x <= mathBuffer.values.Count));
+            int input = inOutStream.ReadInt(x => (x > 0 && x <= mathBuffer.values.Count));
 
             mathBuffer.TempValue = input;
             mathBuffer.AccValue = mathBuffer.values[input - 1];

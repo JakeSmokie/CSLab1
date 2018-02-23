@@ -41,7 +41,7 @@
     <Compile Include="Operations\Load.cs" />
     <Compile Include="Operations\Save.cs" />
     <Compile Include="PathReader.cs" />
-    <Compile Include="Processing.cs" />
+    <Compile Include="SecondLabOperationsProcessor.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

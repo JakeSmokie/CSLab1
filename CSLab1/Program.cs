@@ -6,7 +6,8 @@ namespace CSLabs
     {
         static void Main(string[] args)
         {
-            new GenericProcessing().Start();
+            new OperationsProcessor().Start();
         }
     }
 }
+

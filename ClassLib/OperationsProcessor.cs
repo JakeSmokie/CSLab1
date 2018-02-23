@@ -5,10 +5,9 @@ using System.Collections.Generic;
 
 namespace ClassLib
 {
-    public class GenericProcessing
+    public class OperationsProcessor
     {
-        protected CalcIn inStream = new CalcIn();
-        protected CalcOut outStream = new CalcOut();
+        protected ICalcIO inOutStream = new ConsoleCalcIO();
 
         protected List<IOperation> operations = new List<IOperation>
         {
@@ -20,21 +19,20 @@ namespace ClassLib
             new Exit()
         };
 
-        protected MathBuffer mathBuffer;
         protected IOperation currentOperation = new SaveNumber();
+        protected MathBuffer mathBuffer;
 
         protected Action OnProcessingStart;
-
         protected Action OnOperationRead;
         protected Func<bool> OnOperationRun;
 
-        public GenericProcessing()
+        public OperationsProcessor()
         {
-            mathBuffer = new MathBuffer(inStream, outStream);
-            
-            OnProcessingStart = () => outStream.SendGreeting();
-            OnOperationRun    = () => currentOperation.Run(mathBuffer, inStream, outStream);
-            OnOperationRead   = () => currentOperation = inStream.ReadOperation(operations);
+            mathBuffer = new MathBuffer(inOutStream);
+
+            OnProcessingStart = () => inOutStream.SendGreeting();
+            OnOperationRun = () => currentOperation.Run(mathBuffer, inOutStream);
+            OnOperationRead = () => currentOperation = inOutStream.ReadOperation(operations);
         }
 
         public void Start()

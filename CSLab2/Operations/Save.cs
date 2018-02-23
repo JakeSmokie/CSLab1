@@ -9,13 +9,12 @@ namespace CSLabs.Operations
         public char OperatorChar => 's';
         public bool Run(params object[] args)
         {
-            var inStream = (CalcIn)args[1];
-            var outStream = (CalcOut)args[2];
+            var inOutStream = (ICalcIO)args[1];
 
-            using (var file = new StreamWriter(new PathReader().Read(inStream, outStream), false))
+            using (var file = new StreamWriter(new PathReader().Read(inOutStream), false))
             {
                 // Operations buffer
-                ((List<string>)args[3]).ForEach(expression => file.WriteLine(expression));
+                ((List<string>)args[2]).ForEach(expression => file.WriteLine(expression));
             }
 
             return true;

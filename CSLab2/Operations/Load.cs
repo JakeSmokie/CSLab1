@@ -13,13 +13,12 @@ namespace CSLabs.Operations
             var mathBuffer = (MathBuffer)args[0];
             var valBuffer = new List<double>();
 
-            var inStream = (CalcIn)args[1];
-            var outStream = (CalcOut)args[2];
+            var inOutStream = (ICalcIO)args[1];
 
-            var operationsBuffer = (List<string>)args[3];
+            var operationsBuffer = (List<string>)args[2];
             var newOperBuffer = new List<string>();
 
-            using (var file = new StreamReader(new PathReader().Read(inStream, outStream, s => File.Exists(s))))
+            using (var file = new StreamReader(new PathReader().Read(inOutStream, s => File.Exists(s))))
             {
                 string expression, rawExpression;
 
@@ -29,7 +28,7 @@ namespace CSLabs.Operations
 
                     double result = new ExpressionParser().Parse(ref expression, valBuffer);
 
-                    outStream.SendLoadResult($"[#{ valBuffer.Count }] { rawExpression } = " +
+                    inOutStream.SendLoadResult($"[#{ valBuffer.Count }] { rawExpression } = " +
                         (rawExpression != expression ? $"{ expression } = " : "") + result);
                 }
             }

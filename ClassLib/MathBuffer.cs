@@ -1,4 +1,5 @@
 ﻿using ClassLib;
+using System;
 using System.Collections.Generic;
 
 namespace CSLabs
@@ -6,31 +7,28 @@ namespace CSLabs
 
     public class MathBuffer
     {
-        private CalcIn inStream;
-        private CalcOut outStream;
-        
+        private ICalcIO inOutStream;
         public List<double> values = new List<double>();
+
         public double AccValue { get; set; }
+        public double TempValue { get; set; }
 
-        public MathBuffer(CalcIn __inStream, CalcOut __outStream)
+        public MathBuffer(ICalcIO _inOutStream)
         {
-            inStream = __inStream;
-            outStream = __outStream;
-
+            inOutStream = _inOutStream;
             AccValue = 0;
         }
-        public double TempValue { get; set; }
 
         public double ReadTempValue()
         {
-            TempValue = inStream.ReadDouble();
+            TempValue = inOutStream.ReadDouble();
             return TempValue;
         }
 
         public void SaveAccValue()
         {
             values.Add(AccValue);
-            outStream.SendMathAcc($"[#{ values.Count }] = { AccValue }");
+            inOutStream.SendMathAcc($"[#{ values.Count }] = { AccValue }");
         }
     }
 }

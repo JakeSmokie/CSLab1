@@ -6,6 +6,12 @@ namespace CSLab2
 {
     internal class ProcessorStorageFilesWork : IProcessorStorageFilesWork, IProcessorStorage
     {
+        public IMathBuffer Maths { get; set; }
+        public ICalcIO CalcIO { get; set; }
+        public List<string> OperationsHistory { get; set; }
+        public IExpressionParser MathExpressionParser { get; set; }
+        public IPathReader FilePathReader { get; set; }
+
         public ProcessorStorageFilesWork()
         {
             CalcIO = new ConsoleCalcIOFilesWork();
@@ -14,11 +20,5 @@ namespace CSLab2
             FilePathReader = new PathReader();
             MathExpressionParser = new ExpressionParser();
         }
-
-        public IMathBuffer Maths { get; set; }
-        public ICalcIO CalcIO { get; set; }
-        public List<string> OperationsHistory { get; set; }
-        public IExpressionParser MathExpressionParser { get; set; }
-        public IPathReader FilePathReader { get; set; }
     }
 }

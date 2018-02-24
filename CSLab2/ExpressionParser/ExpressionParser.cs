@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace CSLabs
 {
-    class ExpressionParser
+    internal class ExpressionParser : IExpressionParser
     {
         private Dictionary<string, string> replaceDictionary = new Dictionary<string, string>()
         {
@@ -16,7 +16,7 @@ namespace CSLabs
 
         public double Parse(ref string expression, List<double> valBuffer)
         {
-            foreach (var pair in replaceDictionary)
+            foreach (KeyValuePair<string, string> pair in replaceDictionary)
             {
                 expression = expression.Replace(pair.Key, pair.Value);
             }

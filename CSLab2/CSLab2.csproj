@@ -36,12 +36,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpressionParser.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="CalcIO\ConsoleCalcIOFilesWork.cs" />
+    <Compile Include="CalcIO\ICalcIOFilesWork.cs" />
+    <Compile Include="ExpressionParser\ExpressionParser.cs" />
+    <Compile Include="ExpressionParser\IExpressionParser.cs" />
+    <Compile Include="Misc\Extensions.cs" />
     <Compile Include="Operations\Load.cs" />
     <Compile Include="Operations\Save.cs" />
-    <Compile Include="PathReader.cs" />
-    <Compile Include="SecondLabOperationsProcessor.cs" />
+    <Compile Include="PathReader\IPathReader.cs" />
+    <Compile Include="PathReader\PathReader.cs" />
+    <Compile Include="ProcessorStorage\IProcessorStorageFilesWork.cs" />
+    <Compile Include="ProcessorStorage\ProcessorStorageFilesWork.cs" />
+    <Compile Include="OperationsProcessor\OperationsProcessorFilesWork.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,19 +2,21 @@
 
 namespace CSLabs.Operations
 {
-    internal class Div : IOperation
+    internal class DivOperation : IOperation
     {
         public char OperatorChar => '/';
-        public bool Run(params object[] args)
+        public bool Run(IProcessorStorage storage)
         {
-            var mathBuffer = (MathBuffer)args[0];
+            ICalcIO calcIO = storage.CalcIO;
+            IMathBuffer mathBuffer = storage.Maths;
 
-            double input;
+            double input = calcIO.ReadMathsTempValue(mathBuffer);
 
-            do
+            while (input == 0)
             {
-                input = mathBuffer.ReadTempValue();
-            } while (input == 0);
+                calcIO.SendDivideException();
+                input = calcIO.ReadMathsTempValue(mathBuffer);
+            }
 
             mathBuffer.AccValue /= input;
             mathBuffer.SaveAccValue();

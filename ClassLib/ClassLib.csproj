@@ -40,11 +40,13 @@
   <ItemGroup>
     <Compile Include="CalcIO\ConsoleCalcIO.cs" />
     <Compile Include="CalcIO\ICalcIO.cs" />
+    <Compile Include="MathBuffer\IMathBuffer.cs" />
     <Compile Include="Misc\Extensions.cs" />
-    <Compile Include="OperationsProcessor.cs" />
+    <Compile Include="OperationsProcessor\IOperationsProcessor.cs" />
+    <Compile Include="OperationsProcessor\OperationsProcessor.cs" />
     <Compile Include="Misc\MyCultureInfo.cs" />
     <Compile Include="Operations\IOperation.cs" />
-    <Compile Include="MathBuffer.cs" />
+    <Compile Include="MathBuffer\MathBuffer.cs" />
     <Compile Include="Operations\Add.cs" />
     <Compile Include="Operations\Div.cs" />
     <Compile Include="Operations\Exit.cs" />
@@ -53,6 +55,8 @@
     <Compile Include="Operations\SaveNumber.cs" />
     <Compile Include="Operations\Sub.cs" />
     <Compile Include="Misc\Utils.cs" />
+    <Compile Include="ProcessorStorage\IProcessorStorage.cs" />
+    <Compile Include="ProcessorStorage\ProcessorStorage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

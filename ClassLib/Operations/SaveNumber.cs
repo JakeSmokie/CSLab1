@@ -1,13 +1,16 @@
-﻿namespace CSLabs.Operations
+﻿using ClassLib;
+
+namespace CSLabs.Operations
 {
-    internal class SaveNumber : IOperation
+    internal class SaveNumberOperation : IOperation
     {
         public char OperatorChar => '\0';
-        public bool Run(params object[] args)
+        public bool Run(IProcessorStorage storage)
         {
-            var mathBuffer = (MathBuffer)args[0];
+            ICalcIO calcIO = storage.CalcIO;
+            IMathBuffer mathBuffer = storage.Maths;
 
-            mathBuffer.AccValue = mathBuffer.ReadTempValue();
+            mathBuffer.AccValue = calcIO.ReadMathsTempValue(mathBuffer);
             mathBuffer.SaveAccValue();
 
             return true;

@@ -1,4 +1,6 @@
 ﻿using ClassLib;
+using CSLab2;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -7,14 +9,24 @@ namespace CSLabs.Operations
     internal class Save : IOperation
     {
         public char OperatorChar => 's';
-        public bool Run(params object[] args)
+        public bool Run(IProcessorStorage storage)
         {
-            var inOutStream = (ICalcIO)args[1];
+            ICalcIO calcIO = storage.CalcIO;
+            List<string> history = null;
 
-            using (var file = new StreamWriter(new PathReader().Read(inOutStream), false))
+            if (storage is IProcessorStorageFilesWork ext)
+            {
+                history = ext.OperationsHistory;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+
+            using (var file = new StreamWriter(new PathReader().Read(calcIO), false))
             {
                 // Operations buffer
-                ((List<string>)args[2]).ForEach(expression => file.WriteLine(expression));
+                history.ForEach(expression => file.WriteLine(expression));
             }
 
             return true;

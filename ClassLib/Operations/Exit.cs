@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ClassLib;
+using System;
 
 namespace CSLabs.Operations
 {
-    internal class Exit : IOperation
+    internal class ExitOperation : IOperation
     {
         public char OperatorChar => 'q';
-        public bool Run(params object[] args)
+        public bool Run(IProcessorStorage storage)
         {
             Console.Beep(440, 1000);
             return false;

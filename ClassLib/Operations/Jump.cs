@@ -3,19 +3,19 @@ using System;
 
 namespace CSLabs.Operations
 {
-    internal class Jump : IOperation
+    internal class JumpOperation : IOperation
     {
         public char OperatorChar => '#';
-        public bool Run(params object[] args)
+        public bool Run(IProcessorStorage storage)
         {
-            var mathBuffer = (MathBuffer)args[0];
-            var inOutStream = (ICalcIO)args[1];
+            ICalcIO calcIO = storage.CalcIO;
+            IMathBuffer mathBuffer = storage.Maths;
 
             Console.CursorTop -= 1;
-            int input = inOutStream.ReadInt(x => (x > 0 && x <= mathBuffer.values.Count));
+            int input = calcIO.ReadInt(x => (x > 0 && x <= mathBuffer.Values.Count));
 
             mathBuffer.TempValue = input;
-            mathBuffer.AccValue = mathBuffer.values[input - 1];
+            mathBuffer.AccValue = mathBuffer.Values[input - 1];
             mathBuffer.SaveAccValue();
 
             return true;

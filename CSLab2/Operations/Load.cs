@@ -1,4 +1,6 @@
 ﻿using ClassLib;
+using CSLab2;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,17 +10,30 @@ namespace CSLabs.Operations
     internal class Load : IOperation
     {
         public char OperatorChar => 'l';
-        public bool Run(params object[] args)
+        public bool Run(IProcessorStorage storage)
         {
-            var mathBuffer = (MathBuffer)args[0];
+            var calcIOFiles = (ICalcIOFilesWork)storage.CalcIO;
+            IMathBuffer mathBuffer = storage.Maths;
+
+            List<string> history = null;
+            IPathReader pathReader = null;
+            IExpressionParser expressionParser = null;
+
+            if (storage is IProcessorStorageFilesWork ext)
+            {
+                history = ext.OperationsHistory;
+                pathReader = ext.FilePathReader;
+                expressionParser = ext.MathExpressionParser;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+
+            var newOperBuffer = new List<string>();
             var valBuffer = new List<double>();
 
-            var inOutStream = (ICalcIO)args[1];
-
-            var operationsBuffer = (List<string>)args[2];
-            var newOperBuffer = new List<string>();
-
-            using (var file = new StreamReader(new PathReader().Read(inOutStream, s => File.Exists(s))))
+            using (var file = new StreamReader(pathReader.Read(storage.CalcIO, s => File.Exists(s))))
             {
                 string expression, rawExpression;
 
@@ -26,18 +41,24 @@ namespace CSLabs.Operations
                 {
                     newOperBuffer.Add(expression);
 
-                    double result = new ExpressionParser().Parse(ref expression, valBuffer);
+                    double result = expressionParser.Parse(ref expression, valBuffer);
 
-                    inOutStream.SendLoadResult($"[#{ valBuffer.Count }] { rawExpression } = " +
+                    if (double.IsNaN(result))
+                    {
+                        calcIOFiles.SendParseError();
+                        return true;
+                    }
+
+                    calcIOFiles.SendLoadResult($"[#{ valBuffer.Count }] { rawExpression } = " +
                         (rawExpression != expression ? $"{ expression } = " : "") + result);
                 }
             }
 
-            mathBuffer.values = valBuffer;
+            mathBuffer.Values = valBuffer;
             mathBuffer.AccValue = valBuffer.Last();
 
-            operationsBuffer.Clear();
-            operationsBuffer.AddRange(newOperBuffer);
+            history.Clear();
+            history.AddRange(newOperBuffer);
 
             return true;
         }

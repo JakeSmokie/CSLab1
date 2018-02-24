@@ -8,7 +8,6 @@ namespace ClassLib
 {
     public class ConsoleCalcIO : ICalcIO
     {
-        public void SendMathAcc(string msg) => Console.WriteLine(msg);
         public void SendGreeting() => Console.WriteLine(
             "Usage:\n" +
             "  when first symbol on line is ‘>’ – enter operand(number)\n" +
@@ -16,23 +15,8 @@ namespace ClassLib
             "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
             "    ‘#’ followed with number of evaluation step\n" +
             "    ‘q’ to exit");
+
         public void SendDivideException() => Console.WriteLine(new DivideByZeroException().Message);
-
-        public void SendFilesInFolder(string folder)
-        {
-            Console.WriteLine("List of existing files:");
-
-            foreach (string file in Directory.GetFiles(folder, "*.txt"))
-            {
-                Console.WriteLine(" * " + file.Replace(folder, "").Replace(".txt", ""));
-            }
-
-            Console.WriteLine(
-                "Enter name of file. \n" +
-                "<< ");
-        }
-
-        public void SendLoadResult(string msg) => Console.WriteLine(msg);
 
         public double ReadDouble(Predicate<double> valueCorrectnessPredicate = null)
         {
@@ -87,17 +71,15 @@ namespace ClassLib
             return result;
         }
 
-        public string GetFileName()
+        public double ReadMathsTempValue(IMathBuffer mathBuffer)
         {
-            string name;
+            mathBuffer.TempValue = ReadDouble();
+            return mathBuffer.TempValue;
+        }
 
-            do
-            {
-                ConsoleUtils.CleanPreviousLine(3);
-                name = Console.ReadLine();
-            } while (string.IsNullOrWhiteSpace(name));
-
-            return name;
+        public void SendMathsAccValue(IMathBuffer mathBuffer)
+        {
+            Console.WriteLine($"[#{ mathBuffer.Values.Count }] = { mathBuffer.AccValue }");
         }
     }
 }

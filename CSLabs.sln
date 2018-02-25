@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "CalcLib\ClassLib.csproj", "{723D0053-E3E6-4AC5-8812-56F0433DE412}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLib", "CalcLib\ClassLib.csproj", "{723D0053-E3E6-4AC5-8812-56F0433DE412}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1", "Lab1\Lab1.csproj", "{21C82480-83E8-484E-ADFE-EB8998BB623C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSLab1", "Lab1\CSLab1.csproj", "{21C82480-83E8-484E-ADFE-EB8998BB623C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2", "Lab2\Lab2.csproj", "{0F78CB78-76E3-4223-9716-16020B4FCE5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSLab2", "Lab2\CSLab2.csproj", "{0F78CB78-76E3-4223-9716-16020B4FCE5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -44,10 +44,10 @@ namespace CSLabs
 
             try
             {
-                result = (double)System.Linq.Dynamic.DynamicExpression.ParseLambda(new ParameterExpression[0], typeof(double), expression).Compile()?.DynamicInvoke();
+                result = (double)System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(new ParameterExpression[0], typeof(double), expression).Compile()?.DynamicInvoke();
                 valBuffer.Add(result);
             }
-            catch (System.Linq.Dynamic.ParseException e)
+            catch (System.Linq.Dynamic.Core.Exceptions.ParseException e)
             {
                 Console.WriteLine(e.Message);
             }

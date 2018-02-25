@@ -17,15 +17,13 @@ namespace CSLab3Server
 
             Console.WriteLine("Server is up. Waiting for connections...");
 
-
-
             try
             {
                 while (true)
                 {
                     Socket handler = listenSocket.Accept();
                     // получаем сообщение
-                    StringBuilder builder = new StringBuilder();
+                    var builder = new StringBuilder();
                     int bytes = 0; // количество полученных байтов
                     byte[] data = new byte[256]; // буфер для получаемых данных
 
@@ -39,7 +37,6 @@ namespace CSLab3Server
                     Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + builder.ToString());
 
                     // отправляем ответ
-                    string message = "ваше сообщение доставлено";
                     data = Encoding.Unicode.GetBytes(builder.ToString());
                     handler.Send(data);
                     // закрываем сокет

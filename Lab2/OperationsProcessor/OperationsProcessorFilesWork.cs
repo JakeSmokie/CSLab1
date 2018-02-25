@@ -1,4 +1,5 @@
-﻿using CSLabs;
+﻿using ClassLib;
+using CSLabs;
 using CSLabs.Operations;
 using System;
 using System.Collections.Generic;

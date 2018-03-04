@@ -1,5 +1,4 @@
 ﻿using ClassLib;
-using CSLab2;
 using System;
 using System.IO;
 using System.Text;

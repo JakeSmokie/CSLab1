@@ -8,8 +8,6 @@ namespace CSLab2
 {
     internal class OperationsProcessorFilesWork : OperationsProcessor
     {
-        private ProcessorStorageFilesWork Storage { get; set; }
-
         public OperationsProcessorFilesWork()
         {
             Storage = new ProcessorStorageFilesWork();
@@ -20,9 +18,8 @@ namespace CSLab2
                 new Save()
             });
 
-            ProcessingStartAction += () => Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
-            OperationRunAction = () => CurrentOperation.Run(Storage);
-            OperationReadAction = UpdateOperationsBuffer + OperationReadAction;
+            processorPostStartAction += () => Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
+            operationPreReadAction += UpdateOperationsBuffer;
         }
 
         private void UpdateOperationsBuffer()
@@ -47,7 +44,7 @@ namespace CSLab2
                     break;
             }
 
-            Storage.OperationsHistory.Add(expression);
+            (Storage as IProcessorStorageFilesWork)?.OperationsHistory.Add(expression);
         }
     }
 }

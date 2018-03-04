@@ -1,5 +1,4 @@
-﻿using System;
-using ClassLib;
+﻿using ClassLib;
 
 namespace CSLabs
 {

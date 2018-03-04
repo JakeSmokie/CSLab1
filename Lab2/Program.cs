@@ -1,8 +1,4 @@
-﻿using System;
-using ClassLib;
-using CSLabs;
-
-namespace CSLab2
+﻿namespace CSLab2
 {
     internal sealed class Program
     {

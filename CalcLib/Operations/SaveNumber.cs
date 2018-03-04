@@ -10,7 +10,8 @@ namespace CSLabs.Operations
             ICalcIO calcIO = storage.CalcIO;
             IMathBuffer mathBuffer = storage.Maths;
 
-            mathBuffer.AccValue = calcIO.ReadMathsTempValue(mathBuffer);
+            mathBuffer.TempValue = calcIO.ReadDouble();
+            mathBuffer.AccValue = mathBuffer.TempValue;
             mathBuffer.SaveAccValue();
 
             return true;

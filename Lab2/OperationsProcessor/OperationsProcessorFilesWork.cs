@@ -21,7 +21,6 @@ namespace CSLab2
             });
 
             ProcessingStartAction += () => Console.WriteLine("    ‘l’ to load file, ‘s’ to save");
-
             OperationRunAction = () => CurrentOperation.Run(Storage);
             OperationReadAction = UpdateOperationsBuffer + OperationReadAction;
         }

@@ -1,13 +1,17 @@
-﻿using CSLabs.Operations;
+﻿using CSLabs;
+using CSLabs.Operations;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace ClassLib
 {
     public class OperationsProcessor : IOperationsProcessor
     {
-        public bool IsRunning { get; private set; }
-        private ProcessorStorage Storage { get; set; }
+        private IProcessorStorage Storage { get; set; }
 
         protected List<IOperation> Operations { get; set; }
         protected IOperation CurrentOperation { get; set; }
@@ -18,8 +22,6 @@ namespace ClassLib
 
         public OperationsProcessor()
         {
-            IsRunning = false;
-
             Operations = new List<IOperation>
             {
                 new AddOperation(),
@@ -33,19 +35,18 @@ namespace ClassLib
             CurrentOperation = new SaveNumberOperation();
             Storage = new ProcessorStorage();
 
-            ProcessingStartAction = () => Storage.CalcIO.SendGreeting();
             OperationRunAction = () => CurrentOperation.Run(Storage);
             OperationReadAction = () => CurrentOperation = Storage.CalcIO.ReadOperation(Operations);
         }
 
         public void Start()
         {
-            if (IsRunning)
-            {
-                throw new Exception($"{ GetType().ToString() } is already running");
-            }
-
-            IsRunning = true;
+            Storage.CalcIO.WriteLine("Usage:\n" +
+                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
+                "  when first symbol on line is ‘@’ – enter operation\n" +
+                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
+                "    ‘#’ followed with number of evaluation step\n" +
+                "    ‘q’ to exit");
 
             MyCultureInfo.Apply();
             ProcessingStartAction?.Invoke();
@@ -54,8 +55,6 @@ namespace ClassLib
             {
                 OperationReadAction?.Invoke();
             }
-
-            IsRunning = false;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace CSLabs.Operations
         public char OperatorChar => 'l';
         public bool Run(IProcessorStorage storage)
         {
-            var calcIOFiles = (ICalcIOFilesWork)storage.CalcIO;
             IMathBuffer mathBuffer = storage.Maths;
 
             List<string> history = null;
@@ -33,7 +32,7 @@ namespace CSLabs.Operations
             var newOperBuffer = new List<string>();
             var valBuffer = new List<double>();
 
-            using (var file = new StreamReader(pathReader.Read(storage.CalcIO, s => File.Exists(s))))
+            using (var file = new StreamReader(pathReader.Read(storage.CalcIO)))
             {
                 string expression, rawExpression;
 
@@ -45,15 +44,15 @@ namespace CSLabs.Operations
 
                     if (double.IsNaN(result))
                     {
-                        calcIOFiles.SendParseError();
+                        storage.CalcIO.WriteLine("Parse error!");
                         return true;
                     }
 
-                    calcIOFiles.SendLoadResult($"[#{ valBuffer.Count }] { rawExpression } = " +
+                    storage.CalcIO.WriteLine($"[#{ valBuffer.Count }] { rawExpression } = " +
                         (rawExpression != expression ? $"{ expression } = " : "") + result);
                 }
             }
-
+                
             mathBuffer.Values = valBuffer;
             mathBuffer.AccValue = valBuffer.Last();
 

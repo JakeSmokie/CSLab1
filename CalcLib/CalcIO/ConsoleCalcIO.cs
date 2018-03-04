@@ -7,21 +7,12 @@ namespace ClassLib
 {
     public class ConsoleCalcIO : ICalcIO
     {
-        public void SendGreeting() => Console.WriteLine(
-            "Usage:\n" +
-            "  when first symbol on line is ‘>’ – enter operand(number)\n" +
-            "  when first symbol on line is ‘@’ – enter operation\n" +
-            "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-            "    ‘#’ followed with number of evaluation step\n" +
-            "    ‘q’ to exit");
-
-        public void SendDivideException() => Console.WriteLine(new DivideByZeroException().Message);
-
+        public void WriteLine(string msg) => Console.WriteLine(msg);
         public double ReadDouble(Predicate<double> valueCorrectnessPredicate = null)
         {
-            double temp;
             Console.WriteLine("> ");
 
+            double temp;
             do
             {
                 ConsoleUtils.CleanPreviousLine(2);
@@ -34,12 +25,11 @@ namespace ClassLib
 
             return temp;
         }
-
         public int ReadInt(Predicate<int> valueCorrectnessPredicate = null)
         {
-            int temp;
             Console.WriteLine("@: #");
 
+            int temp;
             do
             {
                 ConsoleUtils.CleanPreviousLine(4);
@@ -52,7 +42,6 @@ namespace ClassLib
 
             return temp;
         }
-
         public IOperation ReadOperation(List<IOperation> list)
         {
             Console.Write("@: ");
@@ -69,13 +58,6 @@ namespace ClassLib
             Console.WriteLine(result.OperatorChar);
             return result;
         }
-
-        public double ReadMathsTempValue(IMathBuffer mathBuffer)
-        {
-            mathBuffer.TempValue = ReadDouble();
-            return mathBuffer.TempValue;
-        }
-
-        public void SendMathsAccValue(IMathBuffer mathBuffer) => Console.WriteLine($"[#{ mathBuffer.Values.Count }] = { mathBuffer.AccValue }");
+        public string ReadLine() => Console.ReadLine();
     }
 }

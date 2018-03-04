@@ -5,6 +5,6 @@ namespace CSLabs
 {
     public interface IPathReader
     {
-        string Read(ICalcIO inOutStream, Predicate<string> pathCorrectnessPredicate = null);
+        string Read(ICalcIO inOutStream);
     }
 }

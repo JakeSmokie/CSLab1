@@ -13,12 +13,13 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.2" />
-  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="pause" />
+  </Target>
 
   <ItemGroup>
     <ProjectReference Include="..\CalcLib\ClassLib.csproj" />
+    <ProjectReference Include="..\Lab2\CSLab2.csproj" />
   </ItemGroup>
 
 </Project>

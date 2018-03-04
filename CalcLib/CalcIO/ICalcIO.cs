@@ -9,11 +9,8 @@ namespace ClassLib
     {
         double ReadDouble(Predicate<double> valueCorrectnessPredicate = null);
         int ReadInt(Predicate<int> valueCorrectnessPredicate = null);
-        double ReadMathsTempValue(IMathBuffer mathBuffer);
         IOperation ReadOperation(List<IOperation> list);
-
-        void SendDivideException();
-        void SendGreeting();
-        void SendMathsAccValue(IMathBuffer mathBuffer);
+        void WriteLine(string msg);
+        string ReadLine();
     }
 }

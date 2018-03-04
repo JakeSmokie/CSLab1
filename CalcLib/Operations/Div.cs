@@ -1,4 +1,5 @@
-﻿using ClassLib;
+﻿using System;
+using ClassLib;
 
 namespace CSLabs.Operations
 {
@@ -10,14 +11,15 @@ namespace CSLabs.Operations
             ICalcIO calcIO = storage.CalcIO;
             IMathBuffer mathBuffer = storage.Maths;
 
-            double input = calcIO.ReadMathsTempValue(mathBuffer);
+            double input = calcIO.ReadDouble();
 
             while (input == 0)
             {
-                calcIO.SendDivideException();
-                input = calcIO.ReadMathsTempValue(mathBuffer);
+                calcIO.WriteLine(new DivideByZeroException().Message);
+                input = calcIO.ReadDouble();
             }
 
+            mathBuffer.TempValue = input;
             mathBuffer.AccValue /= input;
             mathBuffer.SaveAccValue();
 

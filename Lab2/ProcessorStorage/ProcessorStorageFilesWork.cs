@@ -8,7 +8,7 @@ namespace CSLab2
     {
         public ProcessorStorageFilesWork()
         {
-            CalcIO = new ConsoleCalcIOFilesWork();
+            CalcIO = new ConsoleCalcIO();
             Maths = new MathBuffer(CalcIO);
             OperationsHistory = new List<string>();
             FilePathReader = new PathReader();

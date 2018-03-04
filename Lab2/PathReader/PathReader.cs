@@ -2,6 +2,7 @@
 using CSLab2;
 using System;
 using System.IO;
+using System.Text;
 
 namespace CSLabs
 {
@@ -9,21 +10,23 @@ namespace CSLabs
     {
         private string FolderPath => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\WolframFiles\";
 
-        public string Read(ICalcIO calcIO, Predicate<string> pathCorrectnessPredicate = null)
+        public string Read(ICalcIO calcIO)
         {
-            var inOutStream = (ICalcIOFilesWork)calcIO;
-
             Directory.CreateDirectory(FolderPath);
-            inOutStream.SendFilesInFolder(FolderPath);
 
-            string finalName;
+            var stringBuilder = new StringBuilder("List of existing files:\n");
 
-            do
+            foreach (string file in Directory.GetFiles(FolderPath, "*.txt"))
             {
-                finalName = FolderPath + inOutStream.ReadFileName() + ".txt";
-            } while (!(pathCorrectnessPredicate?.Invoke(finalName) ?? true));
+                var str = file.Replace(FolderPath, "");
+                stringBuilder.Append(str.Substring(0, str.LastIndexOf(".txt")));
+                stringBuilder.Append("\n");
+            }
 
-            return finalName;
+            calcIO.WriteLine(stringBuilder.Append("Enter name of file:").ToString());
+
+            var name = calcIO.ReadLine();
+            return FolderPath + (string.IsNullOrWhiteSpace(name) ? "_" : name) + ".txt";
         }
     }
 }

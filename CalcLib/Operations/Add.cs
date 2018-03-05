@@ -2,7 +2,7 @@
 
 namespace CSLabs.Operations
 {
-    internal class AddOperation : IOperation
+    public class AddOperation : IOperation
     {
         public char OperatorChar => '+';
         public bool Run(IProcessorStorage storage)

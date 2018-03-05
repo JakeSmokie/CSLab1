@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq.Expressions;
+using ClassLib;
 
 namespace CSLabs
 {
@@ -14,7 +15,7 @@ namespace CSLabs
             ["Sqrt"] = "Math.Sqrt"
         };
 
-        public double Parse(ref string expression, List<double> valBuffer)
+        public double Parse(ref string expression, List<double> valBuffer, ICalcIO calcIO)
         {
             foreach (KeyValuePair<string, string> pair in replaceDictionary)
             {
@@ -49,7 +50,7 @@ namespace CSLabs
             }
             catch (System.Linq.Dynamic.Core.Exceptions.ParseException e)
             {
-                Console.WriteLine(e.Message);
+                calcIO.Write(e.Message + "\n");
             }
 
             return result;

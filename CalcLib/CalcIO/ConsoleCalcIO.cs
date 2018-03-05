@@ -7,57 +7,44 @@ namespace ClassLib
 {
     public class ConsoleCalcIO : ICalcIO
     {
-        public void WriteLine(string msg) => Console.WriteLine(msg);
+        public void Write(string msg) => Console.Out.Write(msg);
         public double ReadDouble(Predicate<double> valueCorrectnessPredicate = null)
         {
-            Console.WriteLine("> ");
+            double result;
+            Write("> ");
 
-            double temp;
-            do
+            while (!double.TryParse(ReadLine(), out result) || !(valueCorrectnessPredicate?.Invoke(result) ?? true))
             {
-                ConsoleUtils.CleanPreviousLine(2);
+                Write("Wrong input. Try again.\n> ");
+            }
 
-                while (!double.TryParse(Console.ReadLine(), out temp))
-                {
-                    ConsoleUtils.CleanPreviousLine(2);
-                }
-            } while (!(valueCorrectnessPredicate?.Invoke(temp) ?? true));
-
-            return temp;
+            return result;
         }
         public int ReadInt(Predicate<int> valueCorrectnessPredicate = null)
         {
-            Console.WriteLine("@: #");
+            int result;
+            Write("#> ");
 
-            int temp;
-            do
+            while (!int.TryParse(ReadLine(), out result) || !(valueCorrectnessPredicate?.Invoke(result) ?? true))
             {
-                ConsoleUtils.CleanPreviousLine(4);
+                Write("Wrong input. Try again.\n#> ");
+            }
 
-                while (!int.TryParse(Console.ReadLine(), out temp))
-                {
-                    ConsoleUtils.CleanPreviousLine(4);
-                }
-            } while (!(valueCorrectnessPredicate?.Invoke(temp) ?? true));
-
-            return temp;
+            return result;
         }
         public IOperation ReadOperation(List<IOperation> list)
         {
-            Console.Write("@: ");
-
-            char key;
+            Write("@: ");
             IOperation result = null;
+            string input = ReadLine().ToLower();
 
-            do
+            while ((result = list.Find(x => x.OperatorChar.ToString() == input)) == null)
             {
-                key = Console.ReadKey(true).KeyChar;
+                Write("Wrong input. Try again.\n@: ");
+                input = ReadLine().ToLower();
             }
-            while ((result = list.Find(x => x.OperatorChar == key)) == null);
-
-            Console.WriteLine(result.OperatorChar);
             return result;
         }
-        public string ReadLine() => Console.ReadLine();
+        public string ReadLine() => Console.In.ReadLine();
     }
 }

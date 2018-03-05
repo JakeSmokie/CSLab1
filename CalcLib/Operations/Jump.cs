@@ -3,7 +3,7 @@ using System;
 
 namespace CSLabs.Operations
 {
-    internal class JumpOperation : IOperation
+    public class JumpOperation : IOperation
     {
         public char OperatorChar => '#';
         public bool Run(IProcessorStorage storage)
@@ -11,7 +11,6 @@ namespace CSLabs.Operations
             ICalcIO calcIO = storage.CalcIO;
             IMathBuffer mathBuffer = storage.Maths;
 
-            Console.CursorTop -= 1;
             int input = calcIO.ReadInt(x => (x > 0 && x <= mathBuffer.Values.Count));
 
             mathBuffer.TempValue = input;

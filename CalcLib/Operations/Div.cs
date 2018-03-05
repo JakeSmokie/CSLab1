@@ -3,7 +3,7 @@ using ClassLib;
 
 namespace CSLabs.Operations
 {
-    internal class DivOperation : IOperation
+    public class DivOperation : IOperation
     {
         public char OperatorChar => '/';
         public bool Run(IProcessorStorage storage)
@@ -15,7 +15,7 @@ namespace CSLabs.Operations
 
             while (input == 0)
             {
-                calcIO.WriteLine(new DivideByZeroException().Message);
+                calcIO.Write($"{ new DivideByZeroException().Message }\n");
                 input = calcIO.ReadDouble();
             }
 

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace CSLabs.Operations
 {
-    internal class Save : IOperation
+    internal class SaveOperation : IOperation
     {
         public char OperatorChar => 's';
         public bool Run(IProcessorStorage storage)

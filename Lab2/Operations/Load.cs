@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CSLabs.Operations
 {
-    internal class Load : IOperation
+    internal class LoadOperation : IOperation
     {
         public char OperatorChar => 'l';
         public bool Run(IProcessorStorage storage)
@@ -31,8 +31,9 @@ namespace CSLabs.Operations
 
             var newOperBuffer = new List<string>();
             var valBuffer = new List<double>();
+            ICalcIO calcIO = storage.CalcIO;
 
-            using (var file = new StreamReader(pathReader.Read(storage.CalcIO)))
+            using (var file = new StreamReader(pathReader.Read(calcIO)))
             {
                 string expression, rawExpression;
 
@@ -40,16 +41,15 @@ namespace CSLabs.Operations
                 {
                     newOperBuffer.Add(expression);
 
-                    double result = expressionParser.Parse(ref expression, valBuffer);
+                    double result = expressionParser.Parse(ref expression, valBuffer, calcIO);
 
                     if (double.IsNaN(result))
                     {
-                        storage.CalcIO.WriteLine("Parse error!");
+                        calcIO.Write("Parse error!\n");
                         return true;
                     }
 
-                    storage.CalcIO.WriteLine($"[#{ valBuffer.Count }] { rawExpression } = " +
-                        (rawExpression != expression ? $"{ expression } = " : "") + result);
+                    calcIO.Write($"[#{ valBuffer.Count }] { rawExpression } = { (rawExpression != expression ? $"{ expression } = " : "") }{ result }\n");
                 }
             }
                 

@@ -2,7 +2,7 @@
 
 namespace CSLabs.Operations
 {
-    internal class MulOperation : IOperation
+    public class MulOperation : IOperation
     {
         public char OperatorChar => '*';
         public bool Run(IProcessorStorage storage)

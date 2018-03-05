@@ -6,45 +6,31 @@ namespace ClassLib
 {
     public class OperationsProcessor : IOperationsProcessor
     {
-        protected IProcessorStorage Storage { get; set; }
-        protected List<IOperation> Operations { get; set; }
-        protected IOperation CurrentOperation { get; set; }
+        public List<IOperation> Operations { get; private set; }
+        public IOperation CurrentOperation { get; private set; }
 
-        protected event Action processorPostStartAction;
-        protected event Action operationPreReadAction;
+        public event Action ProcessorPostStartAction;
+        public event Action OperationPreReadAction;
 
-        public OperationsProcessor()
+        private IProcessorStorage _storage;
+
+        public OperationsProcessor(IProcessorStorage storage, List<IOperation> operations, IOperation firstOperation)
         {
-            Operations = new List<IOperation>
-            {
-                new AddOperation(),
-                new SubOperation(),
-                new DivOperation(),
-                new MulOperation(),
-                new JumpOperation(),
-                new ExitOperation()
-            };
+            Operations = operations;
 
-            CurrentOperation = new SaveNumberOperation();
-            Storage = new ProcessorStorage();
+            CurrentOperation = firstOperation;
+            _storage = storage;
         }
 
         public void Start()
         {
-            Storage.CalcIO.WriteLine("Usage:\n" +
-                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
-                "  when first symbol on line is ‘@’ – enter operation\n" +
-                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-                "    ‘#’ followed with number of evaluation step\n" +
-                "    ‘q’ to exit");
-
             MyCultureInfo.Apply();
-            processorPostStartAction?.Invoke();
+            ProcessorPostStartAction?.Invoke();
 
-            while (CurrentOperation.Run(Storage))
+            while (CurrentOperation.Run(_storage))
             {
-                operationPreReadAction?.Invoke();
-                CurrentOperation = Storage.CalcIO.ReadOperation(Operations);
+                OperationPreReadAction?.Invoke();
+                CurrentOperation = _storage.CalcIO.ReadOperation(Operations);
             }
         }
     }

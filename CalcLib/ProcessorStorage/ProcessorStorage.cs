@@ -2,15 +2,15 @@
 
 namespace ClassLib
 {
-    internal class ProcessorStorage : IProcessorStorage
+    public class ProcessorStorage : IProcessorStorage
     {
         public IMathBuffer Maths { get; set; }
         public ICalcIO CalcIO { get; set; }
 
-        public ProcessorStorage()
+        public ProcessorStorage(IMathBuffer maths, ICalcIO calcIO)
         {
-            CalcIO = new ConsoleCalcIO();
-            Maths = new MathBuffer(CalcIO);
+            Maths = maths;
+            CalcIO = calcIO;
         }
     }
 }

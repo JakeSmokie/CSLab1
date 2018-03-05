@@ -9,7 +9,7 @@ namespace ClassLib
         double ReadDouble(Predicate<double> valueCorrectnessPredicate = null);
         int ReadInt(Predicate<int> valueCorrectnessPredicate = null);
         IOperation ReadOperation(List<IOperation> list);
-        void WriteLine(string msg);
+        void Write(string msg);
         string ReadLine();
     }
 }

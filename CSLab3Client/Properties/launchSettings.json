@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CSLab3Client": {
+      "commandName": "Project",
+      "commandLineArgs": "localhost 8888"
+    }
+  }
+}

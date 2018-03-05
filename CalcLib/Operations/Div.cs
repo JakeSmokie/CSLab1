@@ -11,12 +11,12 @@ namespace CSLabs.Operations
             ICalcIO calcIO = storage.CalcIO;
             IMathBuffer mathBuffer = storage.Maths;
 
-            double input = calcIO.ReadDouble();
+            double input = storage.InputParser.ReadDouble();
 
             while (input == 0)
             {
-                calcIO.Write($"{ new DivideByZeroException().Message }\n");
-                input = calcIO.ReadDouble();
+                calcIO.WriteLine(new DivideByZeroException().Message);
+                input = (calcIO as ICalcInputParser).ReadDouble();
             }
 
             mathBuffer.TempValue = input;

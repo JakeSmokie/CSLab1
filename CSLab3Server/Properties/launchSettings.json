@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CSLab3Server": {
+      "commandName": "Project",
+      "commandLineArgs": "8888"
+    }
+  }
+}

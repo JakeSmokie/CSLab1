@@ -24,7 +24,7 @@ namespace CSLabs
 
             calcIO.Write(stringBuilder.Append("Enter name of file:\n").ToString());
 
-            var name = calcIO.ReadLine();
+            var name = calcIO.ReadString();
             return FolderPath + (string.IsNullOrWhiteSpace(name) ? "_" : name) + ".txt";
         }
     }

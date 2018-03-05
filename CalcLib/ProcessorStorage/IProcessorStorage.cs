@@ -4,7 +4,8 @@ namespace ClassLib
 {
     public interface IProcessorStorage
     {
-        ICalcIO CalcIO { get; set; }
-        IMathBuffer Maths { get; set; }
+        ICalcIO CalcIO { get; }
+        IMathBuffer Maths { get; }
+        ICalcInputParser InputParser { get; }
     }
 }

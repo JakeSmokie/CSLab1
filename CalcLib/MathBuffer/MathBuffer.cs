@@ -19,7 +19,7 @@ namespace CSLabs
         public void SaveAccValue()
         {
             Values.Add(AccValue);
-            CalcIO.Write($"[#{ Values.Count }] = { AccValue }\n");
+            CalcIO.WriteLine($"[#{ Values.Count }] = { AccValue }");
         }
     }
 }

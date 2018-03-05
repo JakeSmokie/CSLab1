@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ClassLib;
+using ClassLib.CalcIO;
 using CSLabs.Operations;
 
 namespace CSLabs
@@ -9,8 +10,9 @@ namespace CSLabs
         private static void Main(string[] args)
         {
             var calcIO = new ConsoleCalcIO();
+            var inputParser = new CalcInputParser(calcIO);
             var mathBuffer = new MathBuffer(calcIO);
-            var storage = new ProcessorStorage(mathBuffer, calcIO);
+            var storage = new ProcessorStorage(mathBuffer, calcIO, inputParser);
             var firstOperation = new SaveNumberOperation();
             var operations = new List<IOperation>
             {

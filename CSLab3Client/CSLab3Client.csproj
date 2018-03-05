@@ -13,4 +13,8 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CSLab3Server\CSLab3Server.csproj" />
+  </ItemGroup>
+
 </Project>

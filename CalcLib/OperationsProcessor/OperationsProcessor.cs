@@ -24,13 +24,20 @@ namespace ClassLib
 
         public void Start()
         {
-            MyCultureInfo.Apply();
-            ProcessorPostStartAction?.Invoke();
-
-            while (CurrentOperation.Run(_storage))
+            try
             {
-                OperationPreReadAction?.Invoke();
-                CurrentOperation = _storage.CalcIO.ReadOperation(Operations);
+                MyCultureInfo.Apply();
+                ProcessorPostStartAction?.Invoke();
+
+                while (CurrentOperation.Run(_storage))
+                {
+                    OperationPreReadAction?.Invoke();
+                    CurrentOperation = _storage.InputParser.ReadOperation(Operations);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }

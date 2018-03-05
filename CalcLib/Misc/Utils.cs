@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSLabs
+﻿namespace CSLabs
 {
     public static class ConsoleUtils
     {

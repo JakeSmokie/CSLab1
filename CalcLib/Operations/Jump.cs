@@ -1,5 +1,4 @@
 ﻿using ClassLib;
-using System;
 
 namespace CSLabs.Operations
 {
@@ -11,7 +10,7 @@ namespace CSLabs.Operations
             ICalcIO calcIO = storage.CalcIO;
             IMathBuffer mathBuffer = storage.Maths;
 
-            int input = calcIO.ReadInt(x => (x > 0 && x <= mathBuffer.Values.Count));
+            int input = storage.InputParser.ReadInt(x => (x > 0 && x <= mathBuffer.Values.Count));
 
             mathBuffer.TempValue = input;
             mathBuffer.AccValue = mathBuffer.Values[input - 1];

@@ -2,16 +2,16 @@
 
 namespace CSLabs.Operations
 {
-    public class SubOperation : IOperation
+    public class MultiplyOperation : IOperation
     {
-        public char OperatorChar => '-';
+        public char OperatorChar => '*';
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;
             IMathBuffer mathBuffer = storage.Maths;
 
             mathBuffer.TempValue = storage.InputParser.ReadDouble();
-            mathBuffer.AccValue -= mathBuffer.TempValue;
+            mathBuffer.AccValue *= mathBuffer.TempValue;
             mathBuffer.SaveAccValue();
 
             return true;

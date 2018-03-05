@@ -1,12 +1,15 @@
-﻿namespace CSLabs
+﻿using System.Globalization;
+using System.Threading;
+
+namespace CSLabs
 {
-    public static class ConsoleUtils
+    public static class Utils
     {
-        public static void CleanPreviousLine(int offset)
+        public static void SetDotAsDecimalSeparator()
         {
-            //Console.CursorTop -= 1;
-            //Console.MoveBufferArea(offset, Console.CursorTop, Console.BufferWidth - offset, 1, Console.BufferWidth, Console.CursorTop, ' ', Console.ForegroundColor, Console.BackgroundColor);
-            //Console.CursorLeft = offset;
+            var newCInfo = (CultureInfo) Thread.CurrentThread.CurrentCulture.Clone();
+            newCInfo.NumberFormat.NumberDecimalSeparator = ".";
+            Thread.CurrentThread.CurrentCulture = newCInfo;
         }
     }
 }

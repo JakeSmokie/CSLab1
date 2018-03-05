@@ -1,4 +1,5 @@
-﻿using CSLabs.Operations;
+﻿using CSLabs;
+using CSLabs.Operations;
 using System;
 using System.Collections.Generic;
 
@@ -26,7 +27,7 @@ namespace ClassLib
         {
             try
             {
-                MyCultureInfo.Apply();
+                Utils.SetDotAsDecimalSeparator();
                 ProcessorPostStartAction?.Invoke();
 
                 while (CurrentOperation.Run(_storage))

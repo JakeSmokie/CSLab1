@@ -22,9 +22,9 @@ namespace CSLab2
             var operations = new List<IOperation>
             {
                 new AddOperation(),
-                new SubOperation(),
-                new DivOperation(),
-                new MulOperation(),
+                new SubstractOperation(),
+                new DivideOperation(),
+                new MultiplyOperation(),
                 new JumpOperation(),
                 new ExitOperation(),
                 new LoadOperation(),

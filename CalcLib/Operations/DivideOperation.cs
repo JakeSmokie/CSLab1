@@ -3,7 +3,7 @@ using ClassLib;
 
 namespace CSLabs.Operations
 {
-    public class DivOperation : IOperation
+    public class DivideOperation : IOperation
     {
         public char OperatorChar => '/';
         public bool Run(IProcessorStorage storage)

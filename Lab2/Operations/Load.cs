@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CSLabs.Operations
 {
-    internal class LoadOperation : IOperation
+    public class LoadOperation : IOperation
     {
         public char OperatorChar => 'l';
         public bool Run(IProcessorStorage storage)
@@ -20,7 +20,7 @@ namespace CSLabs.Operations
 
             if (storage is IProcessorStorageFilesWork ext)
             {
-                history = ext.OperationsHistory;
+                history = ext.OperationsHistory.Data;
                 pathReader = ext.FilePathReader;
                 expressionParser = ext.MathExpressionParser;
             }

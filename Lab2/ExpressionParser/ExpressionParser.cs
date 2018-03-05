@@ -6,7 +6,7 @@ using ClassLib;
 
 namespace CSLabs
 {
-    internal class ExpressionParser : IExpressionParser
+    public class ExpressionParser : IExpressionParser
     {
         private Dictionary<string, string> replaceDictionary = new Dictionary<string, string>()
         {

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace CSLabs.Operations
 {
-    internal class SaveOperation : IOperation
+    public class SaveOperation : IOperation
     {
         public char OperatorChar => 's';
         public bool Run(IProcessorStorage storage)
@@ -16,7 +16,7 @@ namespace CSLabs.Operations
 
             if (storage is IProcessorStorageFilesWork ext)
             {
-                history = ext.OperationsHistory;
+                history = ext.OperationsHistory.Data;
             }
             else
             {

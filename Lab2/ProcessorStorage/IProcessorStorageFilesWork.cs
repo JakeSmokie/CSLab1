@@ -5,7 +5,7 @@ namespace CSLab2
 {
     public interface IProcessorStorageFilesWork
     {
-        List<string> OperationsHistory { get; set; }
+        IOperationsHistory OperationsHistory { get; set; }
         IPathReader FilePathReader { get; set; }
         IExpressionParser MathExpressionParser { get; set; }
     }

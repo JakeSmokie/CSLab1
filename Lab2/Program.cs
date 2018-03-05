@@ -11,7 +11,7 @@ namespace CSLab2
         {
             var calcIO = new ConsoleCalcIO();
             var mathBuffer = new MathBuffer(calcIO);
-            var history = new List<string>();
+            var history = new OperationsHistory();
             var expParser = new ExpressionParser();
             var pathReader = new PathReader();
             var storage = new ProcessorStorageFilesWork(mathBuffer, calcIO, history, expParser, pathReader);
@@ -39,30 +39,7 @@ namespace CSLab2
                 "    ‘q’ to exit\n" +
                 "    ‘l’ to load file, ‘s’ to save\n");
 
-            processor.OperationPreReadAction += () =>
-            {
-                if (processor.CurrentOperation.OperatorChar.IsOneOf('l', 's', 'q'))
-                {
-                    return;
-                }
-
-                string expression;
-
-                switch (processor.CurrentOperation.OperatorChar)
-                {
-                    case '\0':
-                        expression = storage.Maths.Values[0].ToWolfString();
-                        break;
-                    case '#':
-                        expression = $"Out[{ storage.Maths.TempValue }]";
-                        break;
-                    default:
-                        expression = $"Out[-1] { processor.CurrentOperation.OperatorChar } { storage.Maths.TempValue.ToWolfString() } ";
-                        break;
-                }
-
-                (storage as IProcessorStorageFilesWork)?.OperationsHistory.Add(expression);
-            };
+            processor.OperationPreReadAction += () => history.Update(processor, storage);
 
             processor.Start();
         }

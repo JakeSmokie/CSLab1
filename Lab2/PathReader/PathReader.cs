@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSLabs
 {
-    internal class PathReader : IPathReader
+    public class PathReader : IPathReader
     {
         private string FolderPath => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\WolframFiles\";
 

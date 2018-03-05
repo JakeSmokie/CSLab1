@@ -8,6 +8,7 @@ namespace ClassLib
     public class ConsoleCalcIO : ICalcIO
     {
         public void Write(string msg) => Console.Out.Write(msg);
+        public string ReadLine() => Console.In.ReadLine();
         public double ReadDouble(Predicate<double> valueCorrectnessPredicate = null)
         {
             double result;
@@ -45,6 +46,5 @@ namespace ClassLib
             }
             return result;
         }
-        public string ReadLine() => Console.In.ReadLine();
     }
 }

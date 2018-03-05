@@ -1,56 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ClassLib;
+using CSLabs;
+using CSLabs.Operations;
 
-namespace CSLab3Server
+namespace CSLab2
 {
-    internal class Program
+    internal sealed class Program
     {
-        private static Object syncObject = new Object();
-        private static void Write()
+        private static void Main(string[] args)
         {
-            lock (syncObject)
+            var calcIO = new ConsoleCalcIO();
+            var mathBuffer = new MathBuffer(calcIO);
+            var history = new OperationsHistory();
+            var expParser = new ExpressionParser();
+            var pathReader = new PathReader();
+            var storage = new ProcessorStorageFilesWork(mathBuffer, calcIO, history, expParser, pathReader);
+            var firstOperation = new SaveNumberOperation();
+            var operations = new List<IOperation>
             {
-                Console.WriteLine("test");
-            }
-        }
-        static void Main(string[] args)
-        {
-            lock (syncObject)
-            {
-                Write();
-            }
+                new AddOperation(),
+                new SubOperation(),
+                new DivOperation(),
+                new MulOperation(),
+                new JumpOperation(),
+                new ExitOperation(),
+                new LoadOperation(),
+                new SaveOperation()
+            };
 
-            Console.ReadLine();
-        }
-    }
+            var processor = new OperationsProcessor(storage, operations, firstOperation);
 
-    class A
-    {
-        int count = 0;
+            processor.ProcessorPostStartAction += () => storage.CalcIO.Write(
+                "Usage:\n" +
+                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
+                "  when first symbol on line is ‘@’ – enter operation\n" +
+                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
+                "    ‘#’ followed with number of evaluation step\n" +
+                "    ‘q’ to exit\n" +
+                "    ‘l’ to load file, ‘s’ to save\n");
 
-        public void Go()
-        {
-            List<Action> actions = new List<Action>();
-            for (count = 0; count < 10; count++)
-            {
-                actions.Add(() => Console.WriteLine(count));
-            }
-            foreach (var action in actions)
-            {
-                action();
-            }
+            processor.OperationPreReadAction += () => history.Update(processor, storage);
 
-        }
-        public virtual void Foo()
-        {
-            Console.Write("Class A");
-        }
-    }
-    class B : A
-    {
-        public override void Foo()
-        {
-            Console.Write("Class B");
+            processor.Start();
         }
     }
 }

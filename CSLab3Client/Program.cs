@@ -1,30 +1,44 @@
-﻿using System.Threading;
+﻿using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 using ClassLib;
-using CSLab3Server;
 
 namespace CSLab3Client
 {
     internal class Program
     {
         private static ICalcIO _clientCalcIO;
-        private static ICalcIO _networkCalcIO;
+        private static TCPCalcIO _networkCalcIO;
 
         private static bool _programRunning;
 
         private static void Main(string[] args)
         {
             _programRunning = true;
-
-            var serverInfo = new ServerInfo
-            {
-                IP = args[0],
-                Port = int.Parse(args[1])
-            };
-
             _clientCalcIO = new ConsoleCalcIO();
-            _networkCalcIO = new TCPClientCalcIO(serverInfo, _clientCalcIO);
+
+            var ipPoint = new IPEndPoint(IPAddress.Parse(args[0]), int.Parse(args[1]));
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            try
+            {
+                socket.Connect(ipPoint);
+            }
+            catch (Exception e)
+            {
+                _clientCalcIO.WriteLine($"Can't connect to server {ipPoint}\nError: {e.Message}");
+                _clientCalcIO.ReadString();
+
+                return;
+            }
+
+            _networkCalcIO = new TCPCalcIO(socket, _clientCalcIO);
 
             var thread = new Thread(new ThreadStart(ReadServerMessages));
+            thread.Start();
+
+            thread = new Thread(new ThreadStart(CheckConnection));
             thread.Start();
 
             while (_programRunning)
@@ -34,10 +48,24 @@ namespace CSLab3Client
                 if (input == "q")
                 {
                     _programRunning = false;
+                    _networkCalcIO.Disconnect();
+                    return;
                 }
 
-                _networkCalcIO.Write(input);
+                if (_programRunning)
+                {
+                    _networkCalcIO.Write(input); 
+                }
             }
+        }
+
+        private static void CheckConnection()
+        {
+            var socket = _networkCalcIO.Handler;
+
+            while (socket.Connected) { }
+
+            _programRunning = false;
         }
 
         private static void ReadServerMessages()

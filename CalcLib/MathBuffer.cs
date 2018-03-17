@@ -5,7 +5,22 @@ namespace CSLabs
 {
     public class MathBuffer : IMathBuffer
     {
-        public double AccValue { get; set; }
+        private double _accValue;
+
+        public double AccValue
+        {
+            get => _accValue;
+            set
+            {
+                if (double.IsInfinity(value))
+                {
+                    CalcIO.WriteLine("Warning! AccValue is too big. Changes canceled.");
+                    return;
+                }
+
+                _accValue = value;
+            }
+        }
         public double TempValue { get; set; }
         public ICalcIO CalcIO { get; set; }
         public List<double> Values { get; set; }

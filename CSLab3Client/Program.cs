@@ -10,7 +10,7 @@ namespace CSLab3Client
     {
         private static ICalcIO _clientCalcIO;
         private static TCPCalcIO _networkCalcIO;
-
+        private static Thread _readMessagesThread;
         private static bool _programRunning;
 
         private static void Main(string[] args)
@@ -35,11 +35,8 @@ namespace CSLab3Client
 
             _networkCalcIO = new TCPCalcIO(socket, _clientCalcIO);
 
-            var thread = new Thread(new ThreadStart(ReadServerMessages));
-            thread.Start();
-
-            thread = new Thread(new ThreadStart(CheckConnection));
-            thread.Start();
+            _readMessagesThread = new Thread(new ThreadStart(ReadServerMessages));
+            _readMessagesThread.Start();
 
             while (_programRunning)
             {
@@ -57,15 +54,6 @@ namespace CSLab3Client
                     _networkCalcIO.Write(input); 
                 }
             }
-        }
-
-        private static void CheckConnection()
-        {
-            var socket = _networkCalcIO.Handler;
-
-            while (socket.Connected) { }
-
-            _programRunning = false;
         }
 
         private static void ReadServerMessages()

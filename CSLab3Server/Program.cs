@@ -18,6 +18,7 @@ namespace CSLab3Server
         private static List<TCPCalcIO> _clientCalcIO;
         private static List<Thread> _clientThreads;
         private static Socket _listenSocket;
+        private static Thread _connectThread;
 
         private static void Main(string[] args)
         {
@@ -34,7 +35,18 @@ namespace CSLab3Server
             _listenSocket.Bind(ipPoint);
             _listenSocket.Listen(10);
 
-            while(_programRunning)
+            _connectThread = new Thread(new ThreadStart(ConnectionsThread));
+            _connectThread.Start();
+
+            while (_programRunning)
+            {
+                _consoleCalcIO.ReadString();
+            }
+        }
+
+        private static void ConnectionsThread()
+        {
+            while (_programRunning)
             {
                 var socket = _listenSocket.Accept();
                 ConnectClient(socket);

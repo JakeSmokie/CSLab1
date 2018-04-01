@@ -5,6 +5,7 @@ namespace CSLabs.Operations
     public class MultiplyOperation : IOperation
     {
         public char OperatorChar => '*';
+        public string Description => "multiply by value";
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;

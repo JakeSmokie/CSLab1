@@ -10,26 +10,32 @@ namespace ClassLib
         public List<IOperation> Operations { get; private set; }
         public IOperation CurrentOperation { get; private set; }
 
-        public event Action ProcessorPostStartAction;
         public event Action OperationPreReadAction;
-
         private IProcessorStorage _storage;
 
         public OperationsProcessor(IProcessorStorage storage, List<IOperation> operations, IOperation firstOperation)
         {
             Operations = operations;
-
             CurrentOperation = firstOperation;
             _storage = storage;
         }
 
         public void Start()
         {
+            Utils.SetDotAsDecimalSeparator();
+            _storage.CalcIO.WriteLine(
+                "Usage:\n" +
+                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
+                "  when first symbol on line is ‘@’ – enter operation\n" +
+                "  Operations list:");
+
+            foreach (var oper in Operations)
+            {
+                _storage.CalcIO.WriteLine($"    '{oper.OperatorChar}' to {oper.Description}");
+            }
+
             try
             {
-                Utils.SetDotAsDecimalSeparator();
-                ProcessorPostStartAction?.Invoke();
-
                 while (CurrentOperation.Run(_storage))
                 {
                     OperationPreReadAction?.Invoke();

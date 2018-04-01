@@ -6,6 +6,7 @@ namespace CSLabs.Operations
     public class DivideOperation : IOperation
     {
         public char OperatorChar => '/';
+        public string Description => "divide by value";
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;

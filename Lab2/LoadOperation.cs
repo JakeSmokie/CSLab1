@@ -10,6 +10,7 @@ namespace CSLabs.Operations
     public class LoadOperation : IOperation
     {
         public char OperatorChar => 'l';
+        public string Description => "to load history";
         public bool Run(IProcessorStorage storage)
         {
             IMathBuffer mathBuffer = storage.Maths;

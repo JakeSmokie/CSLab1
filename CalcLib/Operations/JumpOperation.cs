@@ -5,6 +5,7 @@ namespace CSLabs.Operations
     public class JumpOperation : IOperation
     {
         public char OperatorChar => '#';
+        public string Description => "jump to calculated value";
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;

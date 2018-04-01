@@ -5,6 +5,7 @@ namespace CSLabs.Operations
     public class AddOperation : IOperation
     {
         public char OperatorChar => '+';
+        public string Description => "add value";
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;

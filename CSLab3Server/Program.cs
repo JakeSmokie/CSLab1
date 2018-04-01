@@ -79,16 +79,6 @@ namespace CSLab3Server
             var storage = new ProcessorStorageFilesWork(mathBuffer, clientCalcIO, history, expParser, pathReader, inputParser);
             var processor = new OperationsProcessor(storage, operations, firstOperation);
 
-            processor.ProcessorPostStartAction += () => storage.CalcIO.Write(
-                "Calc - net version\n" +
-                "Usage:\n" +
-                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
-                "  when first symbol on line is ‘@’ – enter operation\n" +
-                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-                "    ‘#’ followed with number of evaluation step\n" +
-                "    ‘q’ to exit\n" +
-                "    ‘l’ to load file, ‘s’ to save\n");
-
             processor.OperationPreReadAction += () => history.Update(processor, storage);
 
             var thread = new Thread(new ThreadStart(processor.Start));

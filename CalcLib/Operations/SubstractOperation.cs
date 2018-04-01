@@ -5,6 +5,7 @@ namespace CSLabs.Operations
     public class SubstractOperation : IOperation
     {
         public char OperatorChar => '-';
+        public string Description => "substract value";
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;

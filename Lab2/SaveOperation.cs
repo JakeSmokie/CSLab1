@@ -9,6 +9,7 @@ namespace CSLabs.Operations
     public class SaveOperation : IOperation
     {
         public char OperatorChar => 's';
+        public string Description => "to save history";
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ClassLib;
 using ClassLib.CalcIO;
 using CSLabs.Operations;
@@ -25,14 +26,6 @@ namespace CSLabs
             };
 
             var processor = new OperationsProcessor(storage, operations, firstOperation);
-
-            processor.ProcessorPostStartAction += () => storage.CalcIO.Write(
-                "Usage:\n" +
-                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
-                "  when first symbol on line is ‘@’ – enter operation\n" +
-                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-                "    ‘#’ followed with number of evaluation step\n" +
-                "    ‘q’ to exit\n");
 
             processor.Start();
         }

@@ -32,16 +32,6 @@ namespace CSLab2
             };
 
             var processor = new OperationsProcessor(storage, operations, firstOperation);
-
-            processor.ProcessorPostStartAction += () => storage.CalcIO.Write(
-                "Usage:\n" +
-                "  when first symbol on line is ‘>’ – enter operand(number)\n" +
-                "  when first symbol on line is ‘@’ – enter operation\n" +
-                "  operation is one of ‘+’, ‘-‘, ‘/’, ‘*’ or\n" +
-                "    ‘#’ followed with number of evaluation step\n" +
-                "    ‘q’ to exit\n" +
-                "    ‘l’ to load file, ‘s’ to save\n");
-
             processor.OperationPreReadAction += () => history.Update(processor, storage);
 
             processor.Start();

@@ -10,7 +10,6 @@ namespace ClassLib
         List<IOperation> Operations { get; }
 
         event Action OperationPreReadAction;
-        event Action ProcessorPostStartAction;
 
         void Start();
     }

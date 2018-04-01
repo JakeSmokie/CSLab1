@@ -5,6 +5,7 @@ namespace CSLabs.Operations
     public class SaveNumberOperation : IOperation
     {
         public char OperatorChar => '\0';
+        public string Description => "save value";
         public bool Run(IProcessorStorage storage)
         {
             ICalcIO calcIO = storage.CalcIO;

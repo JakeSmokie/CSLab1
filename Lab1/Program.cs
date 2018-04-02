@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using ClassLib;
 using ClassLib.CalcIO;
 using CSLabs.Operations;

@@ -5,11 +5,11 @@
 
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace Labs {
-  public static partial class MathsProccessor
+namespace Labs
+{
+    public static partial class MathsProccessor
   {
     static readonly string __ServiceName = "labs.MathsProccessor";
 

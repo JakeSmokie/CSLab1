@@ -1,7 +1,5 @@
-﻿using System;
-using ClassLib;
+﻿using ClassLib;
 using ClassLib.CalcIO;
-using CSLab4Server;
 using Grpc.Core;
 using Labs;
 
@@ -11,7 +9,10 @@ namespace CSLab4Client
     {
         private static void Main(string[] args)
         {
-            var channel = new Channel("127.0.0.1:50052", ChannelCredentials.Insecure);
+            var ip = args[0];
+            var port = args[1];
+
+            var channel = new Channel($"{ip}:{port}", ChannelCredentials.Insecure);
             var client = new MathsProccessor.MathsProccessorClient(channel);
 
             var calcIO = new ConsoleCalcIO();
@@ -26,7 +27,7 @@ namespace CSLab4Client
             }
             catch (RpcException e)
             {
-                calcIO.WriteLine(e.Message);
+                calcIO.WriteLine($"Error: {e.Status.Detail}");
                 calcIO.ReadString();
             }
 

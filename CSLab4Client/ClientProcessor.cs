@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ClassLib;
-using ClassLib.CalcIO;
 using Labs;
 
 namespace CSLab4Client

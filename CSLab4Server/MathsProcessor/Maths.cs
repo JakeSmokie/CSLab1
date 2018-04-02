@@ -4,13 +4,12 @@
 #region Designer generated code
 
 using pb = global::Google.Protobuf;
-using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
-using scg = global::System.Collections.Generic;
-namespace Labs {
+namespace Labs
+{
 
-  /// <summary>Holder for reflection information generated from maths.proto</summary>
-  public static partial class MathsReflection {
+    /// <summary>Holder for reflection information generated from maths.proto</summary>
+    public static partial class MathsReflection {
 
     #region Descriptor
     /// <summary>File descriptor for maths.proto</summary>

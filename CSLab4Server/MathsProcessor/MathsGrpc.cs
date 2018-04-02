@@ -11,47 +11,40 @@ namespace Labs
 {
     public static partial class MathsProccessor
   {
-    static readonly string __ServiceName = "labs.MathsProccessor";
-
-    static readonly grpc::Marshaller<global::Labs.Arguments> __Marshaller_Arguments = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Arguments.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Labs.Result> __Marshaller_Result = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Result.Parser.ParseFrom);
-
-    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Set = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+        private static readonly string __ServiceName = "labs.MathsProccessor";
+        private static readonly grpc::Marshaller<global::Labs.Arguments> __Marshaller_Arguments = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Arguments.Parser.ParseFrom);
+        private static readonly grpc::Marshaller<global::Labs.Result> __Marshaller_Result = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Result.Parser.ParseFrom);
+        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Set = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Set",
         __Marshaller_Arguments,
         __Marshaller_Result);
-
-    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Jmp = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Jmp = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Jmp",
         __Marshaller_Arguments,
         __Marshaller_Result);
-
-    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Add = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Add = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Add",
         __Marshaller_Arguments,
         __Marshaller_Result);
-
-    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Sub = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Sub = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Sub",
         __Marshaller_Arguments,
         __Marshaller_Result);
-
-    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Mul = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Mul = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Mul",
         __Marshaller_Arguments,
         __Marshaller_Result);
-
-    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Div = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Div = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Div",

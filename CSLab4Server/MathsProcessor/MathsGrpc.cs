@@ -72,7 +72,7 @@ namespace Labs {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Labs.Result> Jmp(global::Labs.Arguments request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Labs.Result> Jump(global::Labs.Arguments request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -231,7 +231,7 @@ namespace Labs {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Set, serviceImpl.Set)
-          .AddMethod(__Method_Jmp, serviceImpl.Jmp)
+          .AddMethod(__Method_Jmp, serviceImpl.Jump)
           .AddMethod(__Method_Add, serviceImpl.Add)
           .AddMethod(__Method_Sub, serviceImpl.Sub)
           .AddMethod(__Method_Mul, serviceImpl.Mul)

@@ -12,19 +12,13 @@ namespace CSLab4Server
 
             var server = new Server()
             {
-                Services =
-                {
-                    MathsProccessor.BindService(new MathsImpl())
-                },
-                Ports =
-                {
-                    new ServerPort("localhost", Port, ServerCredentials.Insecure)
-                },
+                Services = { MathsProccessor.BindService(new MathsImpl()) },
+                Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) },
             };
 
             server.Start();
 
-            Console.WriteLine("Greeter server listening on port " + Port);
+            Console.WriteLine($"Greeter server listening on port {Port}");
             Console.WriteLine("Press any key to stop the server...");
             Console.ReadKey();
 

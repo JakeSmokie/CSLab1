@@ -11,7 +11,7 @@ namespace CSLab4Server
     {
         private Dictionary<string, List<double>> clientHistory = new Dictionary<string, List<double>>();
 
-        public override Task<Result> Jmp(Arguments request, ServerCallContext context)
+        public override Task<Result> Jump(Arguments request, ServerCallContext context)
         {
             List<double> list = clientHistory[request.ID];
             int index = Convert.ToInt32(request.Input - 1);

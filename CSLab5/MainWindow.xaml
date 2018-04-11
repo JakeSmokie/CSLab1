@@ -1,5 +1,39 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
+﻿<Window x:Class="CSLab5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CSLab5">
-    Hello World!
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSLab5"
+        mc:Ignorable="d"
+        Title="CSLab5" Height="198" Width="530"
+        KeyDown="Window_KeyDown"
+        >
+    <Window.Resources>
+        <Style x:Key="Content">
+            <Setter Property="Control.Background" Value="White"/>
+            <Setter Property="Control.BorderBrush" Value="Gray"/>
+        </Style>
+        <Style x:Key="Header">
+            <Setter Property="Control.Background" Value="LightBlue"/>
+            <Setter Property="Control.BorderBrush" Value="Gray"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel HorizontalAlignment="Left" Height="169" VerticalAlignment="Top" Width="525" Margin="0,0,-3,0">
+        <Label Content="Enter address of server (IP:Port)" 
+               Style="{DynamicResource Header}" 
+               Height="69" 
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               FontSize="30"/>
+        <TextBox Name="AddressTextBox"
+                 Text="localhost:50052" 
+                 Height="102" 
+                 TextWrapping="Wrap" 
+                 Style="{DynamicResource Content}" 
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center"
+                 FontSize="25"
+                 MaxLength="25"
+                 KeyDown="Window_KeyDown"/>
+    </StackPanel>
 </Window>

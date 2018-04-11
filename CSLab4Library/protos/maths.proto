@@ -1,0 +1,20 @@
+syntax = "proto3";
+package labs;
+
+service MathsProccessor {
+	rpc Set(Arguments) returns (Result) {}
+	rpc Jump(Arguments) returns (Result) {}
+	rpc Add(Arguments) returns (Result) {}
+	rpc Sub(Arguments) returns (Result) {}
+	rpc Mul(Arguments) returns (Result) {}
+	rpc Div(Arguments) returns (Result) {}
+}
+
+message Arguments {
+	string ID = 1;
+	double Input = 2;
+}
+
+message Result {
+	double Value = 1;
+}

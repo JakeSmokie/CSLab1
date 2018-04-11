@@ -5,46 +5,53 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace Labs
-{
-    public static partial class MathsProccessor
+namespace Labs {
+  public static partial class MathsProccessor
   {
-        private static readonly string __ServiceName = "labs.MathsProccessor";
-        private static readonly grpc::Marshaller<global::Labs.Arguments> __Marshaller_Arguments = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Arguments.Parser.ParseFrom);
-        private static readonly grpc::Marshaller<global::Labs.Result> __Marshaller_Result = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Result.Parser.ParseFrom);
-        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Set = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+    static readonly string __ServiceName = "labs.MathsProccessor";
+
+    static readonly grpc::Marshaller<global::Labs.Arguments> __Marshaller_Arguments = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Arguments.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Labs.Result> __Marshaller_Result = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Labs.Result.Parser.ParseFrom);
+
+    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Set = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Set",
         __Marshaller_Arguments,
         __Marshaller_Result);
-        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Jmp = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+
+    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Jump = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Jmp",
+        "Jump",
         __Marshaller_Arguments,
         __Marshaller_Result);
-        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Add = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+
+    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Add = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Add",
         __Marshaller_Arguments,
         __Marshaller_Result);
-        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Sub = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+
+    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Sub = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Sub",
         __Marshaller_Arguments,
         __Marshaller_Result);
-        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Mul = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+
+    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Mul = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Mul",
         __Marshaller_Arguments,
         __Marshaller_Result);
-        private static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Div = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
+
+    static readonly grpc::Method<global::Labs.Arguments, global::Labs.Result> __Method_Div = new grpc::Method<global::Labs.Arguments, global::Labs.Result>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Div",
@@ -131,21 +138,21 @@ namespace Labs
       {
         return CallInvoker.AsyncUnaryCall(__Method_Set, null, options, request);
       }
-      public virtual global::Labs.Result Jmp(global::Labs.Arguments request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Labs.Result Jump(global::Labs.Arguments request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
-        return Jmp(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return Jump(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Labs.Result Jmp(global::Labs.Arguments request, grpc::CallOptions options)
+      public virtual global::Labs.Result Jump(global::Labs.Arguments request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Jmp, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_Jump, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Labs.Result> JmpAsync(global::Labs.Arguments request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Labs.Result> JumpAsync(global::Labs.Arguments request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
-        return JmpAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return JumpAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Labs.Result> JmpAsync(global::Labs.Arguments request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Labs.Result> JumpAsync(global::Labs.Arguments request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Jmp, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_Jump, null, options, request);
       }
       public virtual global::Labs.Result Add(global::Labs.Arguments request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
@@ -224,7 +231,7 @@ namespace Labs
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Set, serviceImpl.Set)
-          .AddMethod(__Method_Jmp, serviceImpl.Jump)
+          .AddMethod(__Method_Jump, serviceImpl.Jump)
           .AddMethod(__Method_Add, serviceImpl.Add)
           .AddMethod(__Method_Sub, serviceImpl.Sub)
           .AddMethod(__Method_Mul, serviceImpl.Mul)

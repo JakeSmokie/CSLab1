@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CalcLib\ClassLib.csproj" />
-    <ProjectReference Include="..\CSLab4Server\CSLab4Server.csproj" />
+    <ProjectReference Include="..\CSLab4Library\CSLab4Library.csproj" />
   </ItemGroup>
 
 </Project>

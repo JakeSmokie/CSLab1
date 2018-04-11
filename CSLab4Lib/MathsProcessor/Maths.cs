@@ -4,12 +4,13 @@
 #region Designer generated code
 
 using pb = global::Google.Protobuf;
+using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
-namespace Labs
-{
+using scg = global::System.Collections.Generic;
+namespace Labs {
 
-    /// <summary>Holder for reflection information generated from maths.proto</summary>
-    public static partial class MathsReflection {
+  /// <summary>Holder for reflection information generated from maths.proto</summary>
+  public static partial class MathsReflection {
 
     #region Descriptor
     /// <summary>File descriptor for maths.proto</summary>
@@ -22,13 +23,13 @@ namespace Labs
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgttYXRocy5wcm90bxIEbGFicyImCglBcmd1bWVudHMSCgoCSUQYASABKAkS",
-            "DQoFSW5wdXQYAiABKAEiFwoGUmVzdWx0Eg0KBVZhbHVlGAEgASgBMoECCg9N",
+            "DQoFSW5wdXQYAiABKAEiFwoGUmVzdWx0Eg0KBVZhbHVlGAEgASgBMoICCg9N",
             "YXRoc1Byb2NjZXNzb3ISJgoDU2V0Eg8ubGFicy5Bcmd1bWVudHMaDC5sYWJz",
-            "LlJlc3VsdCIAEiYKA0ptcBIPLmxhYnMuQXJndW1lbnRzGgwubGFicy5SZXN1",
-            "bHQiABImCgNBZGQSDy5sYWJzLkFyZ3VtZW50cxoMLmxhYnMuUmVzdWx0IgAS",
-            "JgoDU3ViEg8ubGFicy5Bcmd1bWVudHMaDC5sYWJzLlJlc3VsdCIAEiYKA011",
-            "bBIPLmxhYnMuQXJndW1lbnRzGgwubGFicy5SZXN1bHQiABImCgNEaXYSDy5s",
-            "YWJzLkFyZ3VtZW50cxoMLmxhYnMuUmVzdWx0IgBiBnByb3RvMw=="));
+            "LlJlc3VsdCIAEicKBEp1bXASDy5sYWJzLkFyZ3VtZW50cxoMLmxhYnMuUmVz",
+            "dWx0IgASJgoDQWRkEg8ubGFicy5Bcmd1bWVudHMaDC5sYWJzLlJlc3VsdCIA",
+            "EiYKA1N1YhIPLmxhYnMuQXJndW1lbnRzGgwubGFicy5SZXN1bHQiABImCgNN",
+            "dWwSDy5sYWJzLkFyZ3VtZW50cxoMLmxhYnMuUmVzdWx0IgASJgoDRGl2Eg8u",
+            "bGFicy5Bcmd1bWVudHMaDC5sYWJzLlJlc3VsdCIAYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {

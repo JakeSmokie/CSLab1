@@ -3,7 +3,7 @@ package labs;
 
 service MathsProccessor {
 	rpc Set(Arguments) returns (Result) {}
-	rpc Jmp(Arguments) returns (Result) {}
+	rpc Jump(Arguments) returns (Result) {}
 	rpc Add(Arguments) returns (Result) {}
 	rpc Sub(Arguments) returns (Result) {}
 	rpc Mul(Arguments) returns (Result) {}

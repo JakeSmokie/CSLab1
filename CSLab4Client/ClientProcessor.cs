@@ -39,7 +39,7 @@ namespace CSLab4Client
                 ['#'] = () =>
                 {
                     var input = parser.ReadInt(x => x > 0 && x <= operationsCount);
-                    var result = client.Jmp(new Arguments() { ID = clientID, Input = input }).Value;
+                    var result = client.Jump(new Arguments() { ID = clientID, Input = input }).Value;
 
                     calcIO.WriteLine($"[#{++operationsCount}] = {result}");
                     return true;
